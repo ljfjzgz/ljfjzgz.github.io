@@ -3666,6 +3666,36 @@
                                                 </button>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 border-b border-emerald-200 text-gray-600">2</td>
+                                            <td class="px-4 py-3 border-b border-emerald-200">
+                                                <input
+                                                    type="text"
+                                                    value="运单类型"
+                                                    class="w-full px-3 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                                                />
+                                            </td>
+                                            <td class="px-4 py-3 border-b border-emerald-200">
+                                                <button class="text-rose-600 hover:text-rose-700 text-sm delete-dimension-btn">
+                                                    <i class="fa fa-trash w-4 h-4"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 border-b border-emerald-200 text-gray-600">3</td>
+                                            <td class="px-4 py-3 border-b border-emerald-200">
+                                                <input
+                                                    type="text"
+                                                    value="异地取货节点路线"
+                                                    class="w-full px-3 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                                                />
+                                            </td>
+                                            <td class="px-4 py-3 border-b border-emerald-200">
+                                                <button class="text-rose-600 hover:text-rose-700 text-sm delete-dimension-btn">
+                                                    <i class="fa fa-trash w-4 h-4"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -3705,8 +3735,76 @@
                                                 </button>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 border-b border-emerald-200 text-gray-600">2</td>
+                                            <td class="px-4 py-3 border-b border-emerald-200">
+                                                <input
+                                                    type="text"
+                                                    value="派送费"
+                                                    class="w-full px-3 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                                                />
+                                            </td>
+                                            <td class="px-4 py-3 border-b border-emerald-200">
+                                                <button class="text-rose-600 hover:text-rose-700 text-sm delete-fee-item-btn">
+                                                    <i class="fa fa-trash w-4 h-4"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-4 py-3 border-b border-emerald-200 text-gray-600">3</td>
+                                            <td class="px-4 py-3 border-b border-emerald-200">
+                                                <input
+                                                    type="text"
+                                                    value="燃油附加费"
+                                                    class="w-full px-3 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                                                />
+                                            </td>
+                                            <td class="px-4 py-3 border-b border-emerald-200">
+                                                <button class="text-rose-600 hover:text-rose-700 text-sm delete-fee-item-btn">
+                                                    <i class="fa fa-trash w-4 h-4"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+
+                        <!-- 子维度配置 -->
+                        <div class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 mb-6">
+                            <div class="mb-4">
+                                <h3 class="text-xl font-semibold text-gray-900">子维度配置</h3>
+                            </div>
+                            <div class="flex items-center gap-4 mb-4">
+                                <select id="mainDimensionSelect" class="w-64 px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                    <option value="">请选择主维度</option>
+                                    <option value="1">异地取货节点路线</option>
+                                </select>
+                                <button type="button" id="addMainDimensionBtn" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2">
+                                    <i class="fa fa-plus w-4 h-4"></i>
+                                    新增主维度
+                                </button>
+                            </div>
+                            <div class="p-3 bg-white rounded-xl shadow-sm border border-emerald-100">
+                                <div class="flex justify-between mb-3">
+                                    <h5 id="subDimensionTitle" class="text-lg font-semibold text-gray-800">子维度列表</h5>
+                                    <button type="button" id="addSubDimensionBtn" class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors flex items-center gap-2">
+                                        <i class="fa fa-plus w-4 h-4"></i>
+                                        添加子维度
+                                    </button>
+                                </div>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full border border-emerald-200">
+                                        <thead class="bg-emerald-50">
+                                        <tr>
+                                            <th class="px-4 py-3 text-left font-semibold text-gray-700 border-b border-emerald-200" style="width: 80px;">序号</th>
+                                            <th class="px-4 py-3 text-left font-semibold text-gray-700 border-b border-emerald-200">子维度名称</th>
+                                            <th class="px-4 py-3 text-left font-semibold text-gray-700 border-b border-emerald-200" style="width: 100px;">操作</th>
+                                        </tr>
+                                    </thead>
+                                        <tbody id="subDimensionTableBody"></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
 
@@ -3720,10 +3818,10 @@
                             <!-- 子匹配逻辑列表 -->
                             <div class="p-3 bg-white rounded-xl shadow-sm border border-emerald-100">
                                 <div class="flex justify-between mb-3">
-                                    <h5 id="matchLogicTitle" class="text-lg font-semibold text-gray-800">子匹配逻辑列表</h5>
-                                    <button id="addSubMatchLogic" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg flex items-center gap-2" disabled>
+                                    <h5 id="matchLogicTitle" class="text-lg font-semibold text-gray-800">逻辑列表</h5>
+                                    <button type="button" id="addSubMatchLogic" class="bg-teal-500 hover:bg-teal-600 text-white px-4 py-2 rounded-lg flex items-center gap-2" disabled>
                                         <i class="fa fa-plus w-4 h-4"></i>
-                                        添加子匹配逻辑
+                                        添加逻辑
                                     </button>
                                 </div>
                                 <table class="w-full border border-emerald-200">
@@ -5209,12 +5307,12 @@
         // 匹配逻辑数据
         let matchLogicData = {
             main: [
-                { id: 1, name: "录入报价时必填项的校验逻辑" },
-                { id: 2, name: "业务单据匹配报价兜底逻辑" }
+                { id: 1, name: "报价录入校验逻辑" },
+                { id: 2, name: "单据匹配逻辑" }
             ],
             sub: [
-                { mainId: 1, id: 101, name: "维度1校验逻辑", desc: "维度1的必填项校验" },
-                { mainId: 2, id: 201, name: "维度2匹配逻辑", desc: "维度2的兜底匹配" }
+                { mainId: 1, id: 101, name: "维度1；维度2；维度3", desc: "维度1的必填项校验" },
+                { mainId: 2, id: 201, name: "维度1；维度2；维度3", desc: "维度2的兜底匹配" }
             ]
         };
 
@@ -5248,19 +5346,33 @@
             const list = matchLogicData.sub.filter(s => s.mainId === currentMainMatchLogic);
             list.forEach((s, index) => {
                 const tr = document.createElement('tr');
+                let deleteButton = '';
+                if (list.length > 1 || index > 0) {
+                    deleteButton = `
+                        <button class="text-rose-600 hover:text-rose-700 text-sm" onclick="deleteSubMatchLogic(${s.id})">
+                            <i class="fa fa-trash w-4 h-4"></i>
+                        </button>
+                    `;
+                } else {
+                    deleteButton = `
+                        <button class="text-gray-300 text-sm" disabled>
+                            <i class="fa fa-trash w-4 h-4"></i>
+                        </button>
+                    `;
+                }
                 tr.innerHTML = `
                     <td class="px-4 py-3 border-b border-emerald-200 text-gray-600">${index + 1}</td>
                     <td class="px-4 py-3 border-b border-emerald-200">
                         <input
                             type="text"
                             value="${s.name}"
+                            placeholder="请输入匹配逻辑"
                             class="w-full px-3 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                            onchange="updateMatchLogicName(${s.id}, this.value)"
                         />
                     </td>
                     <td class="px-4 py-3 border-b border-emerald-200">
-                        <button class="text-rose-600 hover:text-rose-700 text-sm" onclick="deleteSubMatchLogic(${s.id})">
-                            <i class="fa fa-trash w-4 h-4"></i>
-                        </button>
+                        ${deleteButton}
                     </td>
                 `;
                 body.appendChild(tr);
@@ -5269,19 +5381,230 @@
 
         // 新增子匹配逻辑
         document.getElementById('addSubMatchLogic').onclick = () => {
-            const name = prompt('子匹配逻辑名称：');
-            if (!name) return;
-            const desc = prompt('描述：', '');
-            matchLogicData.sub.push({ mainId: currentMainMatchLogic, id: subMatchLogicId++, name, desc });
+            const newLogic = { mainId: currentMainMatchLogic, id: subMatchLogicId++, name: '', desc: '' };
+            matchLogicData.sub.push(newLogic);
             renderSubMatchLogic();
         };
 
+        // 更新匹配逻辑名称
+        function updateMatchLogicName(id, name) {
+            const logic = matchLogicData.sub.find(s => s.id === id);
+            if (logic) {
+                logic.name = name;
+            }
+        }
+
         // 删除子匹配逻辑
         function deleteSubMatchLogic(id) {
+            const mainId = matchLogicData.sub.find(s => s.id === id).mainId;
+            const count = matchLogicData.sub.filter(s => s.mainId === mainId).length;
+            if (count <= 1) {
+                alert('至少需要保留一行匹配逻辑');
+                return;
+            }
             if (!confirm('确定删除？')) return;
             matchLogicData.sub = matchLogicData.sub.filter(x => x.id !== id);
             renderSubMatchLogic();
         }
+
+        // 子维度配置数据
+        let subDimensionData = {
+            main: [
+                { id: 1, name: "异地取货节点路线" }
+            ],
+            sub: []
+        };
+
+        let currentMainDimension = null;
+        let subDimensionId = 300;
+        let mainDimensionId = 4;
+
+        // 渲染子维度列表
+        function renderSubDimensions(mainId) {
+            currentMainDimension = mainId;
+            const body = document.getElementById('subDimensionTableBody');
+            body.innerHTML = '';
+            
+            const list = subDimensionData.sub.filter(s => s.mainId === parseInt(mainId));
+            list.forEach((s, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-4 py-3 border-b border-emerald-200 text-gray-600">${index + 1}</td>
+                    <td class="px-4 py-3 border-b border-emerald-200">
+                        <input
+                            type="text"
+                            value="${s.name}"
+                            class="w-full px-3 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm"
+                            onchange="updateSubDimensionName(${s.id}, this.value)"
+                        />
+                    </td>
+                    <td class="px-4 py-3 border-b border-emerald-200">
+                        <button class="text-rose-600 hover:text-rose-700 text-sm" onclick="deleteSubDimension(${s.id})">
+                            <i class="fa fa-trash w-4 h-4"></i>
+                            删除
+                        </button>
+                    </td>
+                `;
+                body.appendChild(tr);
+            });
+        }
+
+        // 添加子维度
+        document.getElementById('addSubDimensionBtn').onclick = () => {
+            const mainId = document.getElementById('mainDimensionSelect').value;
+            if (!mainId) {
+                alert('请先选择主维度');
+                return;
+            }
+            
+            // 创建添加子维度弹窗
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl shadow-2xl p-6 max-w-md w-full">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">添加子维度</h3>
+                        <button class="text-gray-500 hover:text-gray-700" onclick="this.closest('.fixed').remove()">
+                            <i class="fa fa-times w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">子维度名称</label>
+                            <select id="newSubDimensionName" class="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="">请选择子维度</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button class="px-4 py-2 border border-emerald-200 text-gray-700 rounded-lg hover:bg-emerald-50" onclick="this.closest('.fixed').remove()">取消</button>
+                        <button class="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600" onclick="saveNewSubDimension(${mainId})">确定</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        };
+
+        // 保存新增子维度
+        function saveNewSubDimension(mainId) {
+            const name = document.getElementById('newSubDimensionName').value;
+            
+            if (!name) {
+                alert('请选择子维度');
+                return;
+            }
+            
+            const newSubDimension = { 
+                mainId: parseInt(mainId), 
+                id: subDimensionId++, 
+                name, 
+                desc: '' 
+            };
+            subDimensionData.sub.push(newSubDimension);
+            
+            // 关闭弹窗
+            document.querySelector('.fixed').remove();
+            
+            // 更新表格
+            renderSubDimensions(mainId);
+        }
+
+        // 更新子维度名称
+        function updateSubDimensionName(id, name) {
+            const subDimension = subDimensionData.sub.find(s => s.id === id);
+            if (subDimension) {
+                subDimension.name = name;
+            }
+        }
+
+        // 删除子维度
+        function deleteSubDimension(id) {
+            if (!confirm('确定删除？')) return;
+            subDimensionData.sub = subDimensionData.sub.filter(x => x.id !== id);
+            if (currentMainDimension) {
+                renderSubDimensions(currentMainDimension);
+            }
+        }
+
+        // 新增主维度
+        document.getElementById('addMainDimensionBtn').onclick = () => {
+            // 创建自定义弹窗
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="bg-white rounded-xl shadow-2xl p-6 max-w-md w-full">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">新增主维度</h3>
+                        <button class="text-gray-500 hover:text-gray-700" onclick="this.closest('.fixed').remove()">
+                            <i class="fa fa-times w-5 h-5"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">主维度名称</label>
+                            <select id="newMainDimensionName" class="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option value="">请选择主维度</option>
+                                <option value="供应商">供应商</option>
+                                <option value="运单类型">运单类型</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button class="px-4 py-2 border border-emerald-200 text-gray-700 rounded-lg hover:bg-emerald-50" onclick="this.closest('.fixed').remove()">取消</button>
+                        <button class="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600" onclick="saveNewMainDimension()">确定</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        };
+
+        // 保存新增主维度
+        function saveNewMainDimension() {
+            const name = document.getElementById('newMainDimensionName').value;
+            if (!name) {
+                alert('请选择主维度');
+                return;
+            }
+            
+            // 检查是否已存在
+            const exists = subDimensionData.main.some(m => m.name === name);
+            if (exists) {
+                alert('该主维度已存在');
+                return;
+            }
+            
+            // 添加到数据中
+            const newMainDimension = { id: mainDimensionId++, name };
+            subDimensionData.main.push(newMainDimension);
+            
+            // 更新下拉选项
+            const select = document.getElementById('mainDimensionSelect');
+            const option = document.createElement('option');
+            option.value = newMainDimension.id;
+            option.textContent = newMainDimension.name;
+            select.appendChild(option);
+            
+            // 关闭弹窗
+            document.querySelector('.fixed').remove();
+        }
+
+        // 主维度选择变化
+        document.getElementById('mainDimensionSelect').addEventListener('change', function() {
+            const mainId = this.value;
+            if (mainId) {
+                // 清空现有数据
+                subDimensionData.sub = [];
+                
+                // 添加示例数据
+                subDimensionData.sub.push({ mainId: parseInt(mainId), id: subDimensionId++, name: '起始节点', desc: '' });
+                subDimensionData.sub.push({ mainId: parseInt(mainId), id: subDimensionId++, name: '目标节点', desc: '' });
+                
+                renderSubDimensions(mainId);
+            } else {
+                document.getElementById('subDimensionTableBody').innerHTML = '';
+                currentMainDimension = null;
+            }
+        });
 
         // 初始化
         renderMatchLogicTabs();
