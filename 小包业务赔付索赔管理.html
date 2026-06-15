@@ -816,12 +816,18 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-2">索赔原因</label>
                                 <select class="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                     <option value="">全部</option>
-                                    <option value="运输损坏">运输损坏</option>
-                                    <option value="包裹丢失">包裹丢失</option>
-                                    <option value="派送超时">派送超时</option>
-                                    <option value="信息错误">信息错误</option>
-                                    <option value="签收未扫描">签收未扫描</option>
-                                    <option value="其他">其他</option>
+                                    <option value="司机丢件">司机丢件</option>
+                                    <option value="快递丢件">快递丢件</option>
+                                    <option value="AB交接丢件">AB交接丢件</option>
+                                    <option value="未按约定提供卡车/航班">未按约定提供卡车/航班</option>
+                                    <option value="落地少件（航班到达短装）">落地少件（航班到达短装）</option>
+                                    <option value="货站错发/串货">货站错发/串货</option>
+                                    <option value="空运丢件">空运丢件</option>
+                                    <option value="货站破损/湿损">货站破损/湿损</option>
+                                    <option value="时效延误">时效延误</option>
+                                    <option value="国内转运丢失">国内转运丢失</option>
+                                    <option value="清关延误">清关延误</option>
+                                    <option value="国外转运丢件">国外转运丢件</option>
                                 </select>
                             </div>
                             <div>
@@ -933,7 +939,7 @@
                                         <td class="px-3 py-3 text-sm text-gray-600">JFK</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">2026-05-28 10:00</td>
                                         <td class="px-3 py-3 text-sm"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">异常索赔</span></td>
-                                        <td class="px-3 py-3 text-sm text-gray-600">运输损坏</td>
+                                        <td class="px-3 py-3 text-sm text-gray-600">空运丢件</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">按实际损失赔付</td>
                                         <td class="px-3 py-3 text-sm text-emerald-600 font-medium">USD 500.00</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">7.2500</td>
@@ -1170,7 +1176,7 @@
                                 <h4 class="text-sm font-semibold text-orange-700 mb-3 flex items-center gap-2"><i class="fa fa-exclamation-circle"></i>索赔信息</h4>
                                 <dl class="space-y-2 text-sm">
                                     <div class="flex justify-between"><span class="text-gray-500">索赔类型</span><span class="font-medium">异常索赔</span></div>
-                                    <div class="flex justify-between"><span class="text-gray-500">索赔原因</span><span class="font-medium">运输损坏</span></div>
+                                    <div class="flex justify-between"><span class="text-gray-500">索赔原因</span><span class="font-medium">空运丢件</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">索赔标准</span><span class="font-medium">按实际损失赔付</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">索赔金额</span><span class="font-medium text-emerald-600">USD 500.00</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">索赔汇率</span><span class="font-medium">7.2500</span></div>
@@ -1431,12 +1437,10 @@
                                 <label class="block text-sm font-medium text-gray-700 mb-2">索赔原因</label>
                                 <select class="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                     <option value="">全部</option>
-                                    <option value="派送损坏">派送损坏</option>
-                                    <option value="包裹丢失">包裹丢失</option>
+                                    <option value="尾程断更">尾程断更</option>
+                                    <option value="尾程丢失">尾程丢失</option>
+                                    <option value="虚假签收">虚假签收</option>
                                     <option value="派送超时">派送超时</option>
-                                    <option value="签收异常">签收异常</option>
-                                    <option value="信息错误">信息错误</option>
-                                    <option value="其他">其他</option>
                                 </select>
                             </div>
                             <div>
@@ -1543,7 +1547,7 @@
                                         <td class="px-3 py-3 text-sm text-gray-600">UPS-GROUND</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">US</td>
                                         <td class="px-3 py-3 text-sm"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">异常索赔</span></td>
-                                        <td class="px-3 py-3 text-sm text-gray-600">派送损坏</td>
+                                        <td class="px-3 py-3 text-sm text-gray-600">尾程丢失</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">按实际损失赔付</td>
                                         <td class="px-3 py-3 text-sm text-emerald-600 font-medium">USD 50.00</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">7.2500</td>
@@ -2134,10 +2138,10 @@
                                         <tr class="hover:bg-blue-50/30 transition-colors">
                                             <td class="px-4 py-3 text-sm text-gray-900">CLA0000001</td>
                                             <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">干线</span></td>
-                                            <td class="px-4 py-3 text-sm text-gray-600">ATD0000001</td>
+                                            <td class="px-4 py-3 text-sm text-gray-600">DA20260608000001</td>
                                             <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs">正常索赔</span></td>
                                             <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">异常索赔</span></td>
-                                            <td class="px-4 py-3 text-sm text-gray-600">运输损坏</td>
+                                            <td class="px-4 py-3 text-sm text-gray-600">空运丢件</td>
                                             <td class="px-4 py-3 text-sm text-gray-600">WY202605280001</td>
                                             <td class="px-4 py-3 text-sm text-gray-600">SZCWC26052800486</td>
                                             <td class="px-4 py-3 text-sm text-gray-600">USD</td>
@@ -2714,22 +2718,268 @@
                 </div>
             </div>
 
-            <!-- Page: 索赔原因（供应商）占位 -->
+            <!-- Page: 索赔原因（供应商） -->
             <div id="page-supplier-reason" class="page">
                 <div class="p-8">
+                    <!-- Header -->
                     <div class="mb-8">
                         <h2 class="text-3xl font-bold text-gray-900">索赔原因（供应商）</h2>
-                        <p class="text-gray-600 mt-2">管理供应商索赔的原因分类与配置，待文档补充后完善</p>
+                        <p class="text-gray-600 mt-2">定义供应商索赔的原因类型，用于供应商索赔单的分类标记和责任归属判定</p>
                     </div>
-                    <div class="bg-white rounded-xl shadow-sm border border-emerald-100 p-12 text-center">
-                        <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fa fa-file-text-o text-emerald-500 text-4xl"></i>
+
+                    <!-- Filter Section -->
+                    <div class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">各段分类</label>
+                                <select class="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                    <option value="">全部</option>
+                                    <option value="A段">A段</option>
+                                    <option value="B段">B段</option>
+                                    <option value="C段">C段</option>
+                                    <option value="D段">D段</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">索赔类型</label>
+                                <select class="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                    <option value="">全部</option>
+                                    <option value="异常索赔">异常索赔</option>
+                                </select>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-medium text-gray-900 mb-2">页面建设中</h3>
-                        <p class="text-gray-500">请等待产品文档补充完成后，再实现此页面</p>
+                        <div class="flex justify-end mt-4 space-x-2">
+                            <button class="px-4 py-2 text-sm text-gray-600 border border-emerald-200 rounded-lg hover:bg-emerald-50">重置</button>
+                            <button class="px-4 py-2 text-sm text-white bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg hover:shadow-lg">查询</button>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="mb-6 flex items-center justify-between">
+                        <button onclick="openModal('supplier-reason-upload-modal')" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-lg hover:shadow-lg transition-all flex items-center gap-2">
+                            <i class="fa fa-upload w-5 h-5"></i>
+                            导入
+                        </button>
+                        <button class="px-6 py-3 text-emerald-700 border border-emerald-200 rounded-lg hover:bg-emerald-50 flex items-center gap-2">
+                            <i class="fa fa-download w-5 h-5"></i>
+                            导出
+                        </button>
+                    </div>
+
+                    <!-- Data Table -->
+                    <div class="bg-white rounded-xl shadow-sm border border-emerald-100 overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="w-full whitespace-nowrap" style="min-width: 800px;">
+                                <thead class="bg-gradient-to-r from-emerald-50 to-teal-50">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm w-16">序号</th>
+                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm w-24">各段分类</th>
+                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">索赔类型</th>
+                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">索赔原因</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-emerald-100">
+                                    <!-- A段 -->
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">1</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">A段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">司机丢件</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">2</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">A段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">快递丢件</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">3</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs">A段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">AB交接丢件</td>
+                                    </tr>
+                                    <!-- B段 -->
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">4</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">B段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">未按约定提供卡车/航班</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">5</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">B段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">落地少件（航班到达短装）</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">6</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">B段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">货站错发/串货</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">7</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">B段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">空运丢件</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">8</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">B段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">货站破损/湿损</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">9</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">B段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">时效延误</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">10</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-indigo-100 text-indigo-700 rounded text-xs">B段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">国内转运丢失</td>
+                                    </tr>
+                                    <!-- C段 -->
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">11</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs">C段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">清关延误</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">12</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-xs">C段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">国外转运丢件</td>
+                                    </tr>
+                                    <!-- D段 -->
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">13</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs">D段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">尾程断更</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">14</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs">D段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">尾程丢失</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">15</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs">D段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">虚假签收</td>
+                                    </tr>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-4 py-3 text-sm text-gray-600">16</td>
+                                        <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-orange-100 text-orange-700 rounded text-xs">D段</span></td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">异常索赔</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">派送超时</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="flex items-center justify-between px-6 py-4 bg-emerald-50/30 border-t border-emerald-100">
+                            <div class="text-sm text-gray-600">共 16 条记录</div>
+                            <div class="flex items-center gap-2">
+                                <button class="px-3 py-2 border border-emerald-200 rounded-lg hover:bg-emerald-50 disabled:opacity-50" disabled>
+                                    <i class="fa fa-chevron-left w-4 h-4"></i>
+                                </button>
+                                <button class="w-10 h-10 rounded-lg font-medium bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md">1</button>
+                                <button class="px-3 py-2 border border-emerald-200 rounded-lg hover:bg-emerald-50 disabled:opacity-50" disabled>
+                                    <i class="fa fa-chevron-right w-4 h-4"></i>
+                                </button>
+                                <div class="ml-2 text-sm text-gray-500">1 / 1</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- 索赔原因（供应商）导入弹窗 -->
+            <div id="supplier-reason-upload-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-xl shadow-xl w-full max-w-xl mx-4">
+                    <div class="p-5 border-b border-emerald-100">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-bold text-gray-900">索赔原因导入</h3>
+                            <button onclick="closeModal('supplier-reason-upload-modal')" class="text-gray-400 hover:text-gray-600">
+                                <i class="fa fa-times text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-4">
+                        <!-- 下载模板 -->
+                        <div class="bg-emerald-50 rounded-lg p-4">
+                            <div class="flex items-start gap-3">
+                                <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <i class="fa fa-file-excel-o text-emerald-600 text-lg"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-medium text-gray-900 mb-1">下载导入模板</h4>
+                                    <p class="text-gray-600 text-sm mb-2">请先下载标准导入模板，按照模板格式填写数据后再进行导入</p>
+                                    <button class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 flex items-center gap-2 text-sm">
+                                        <i class="fa fa-download"></i>
+                                        下载模板
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 上传区域 -->
+                        <div class="border-2 border-dashed border-emerald-300 rounded-lg p-8 text-center hover:bg-emerald-50/50 transition-colors cursor-pointer">
+                            <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fa fa-cloud-upload text-emerald-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-medium text-gray-900 mb-1">点击或拖拽文件上传</h4>
+                            <p class="text-gray-500 text-sm mb-3">支持 .xlsx 格式，文件大小不超过 10MB</p>
+                            <button class="px-5 py-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-lg hover:shadow-lg text-sm">
+                                选择文件
+                            </button>
+                        </div>
+
+                        <!-- 导入规则说明 -->
+                        <div class="bg-blue-50 rounded-lg p-3">
+                            <h4 class="font-medium text-gray-900 mb-2 flex items-center gap-2 text-sm">
+                                <i class="fa fa-info-circle text-blue-600"></i>
+                                导入规则说明
+                            </h4>
+                            <ul class="space-y-1.5 text-sm text-gray-600">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa fa-check-circle text-emerald-500 mt-0.5 text-xs"></i>
+                                    <span>模板字段：各段分类、索赔类型、索赔原因</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa fa-check-circle text-emerald-500 mt-0.5 text-xs"></i>
+                                    <span>各段分类：仅支持 A段、B段、C段、D段</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa fa-check-circle text-emerald-500 mt-0.5 text-xs"></i>
+                                    <span>索赔类型：仅支持 异常索赔</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa fa-check-circle text-emerald-500 mt-0.5 text-xs"></i>
+                                    <span>重复处理：同一索赔原因+各段分类视为重复，执行更新</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="p-5 border-t border-emerald-100 flex justify-end gap-2">
+                        <button onclick="closeModal('supplier-reason-upload-modal')" class="px-4 py-2 text-gray-600 border border-emerald-200 rounded-lg hover:bg-emerald-50 text-sm">
+                            取消
+                        </button>
+                        <button class="px-4 py-2 text-white bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg hover:shadow-lg text-sm">
+                            开始导入
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            
 
             <!-- Page: 赔付原因（客户） -->
             <div id="page-reason-config" class="page">
@@ -3673,7 +3923,7 @@
         </div>
     </div>
 
-    <!-- 赔付原因基础表编辑弹窗 -->
+    <!-- 赔付原因（客户）配置表编辑弹窗 -->
     <div id="reason-edit-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl mx-4">
             <div class="flex items-center justify-between px-6 py-4 border-b border-emerald-100">
@@ -3756,7 +4006,7 @@
         </div>
     </div>
 
-    <!-- 赔付原因基础表删除确认弹窗 -->
+    <!-- 赔付原因（客户）配置表删除确认弹窗 -->
     <div id="reason-delete-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
         <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4">
             <div class="flex items-center justify-between px-6 py-4 border-b border-red-100">
@@ -3833,12 +4083,18 @@
                             <label class="block text-sm font-medium text-gray-700 mb-1.5">索赔原因 <span class="text-red-500">*</span></label>
                             <select id="trunk-add-reason" class="w-full px-3 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
                                 <option value="">请选择</option>
-                                <option value="运输损坏">运输损坏</option>
-                                <option value="清关延误">清关延误</option>
-                                <option value="转运延误">转运延误</option>
-                                <option value="货损">货损</option>
-                                <option value="操作失误">操作失误</option>
+                                <option value="司机丢件">司机丢件</option>
+                                <option value="快递丢件">快递丢件</option>
+                                <option value="AB交接丢件">AB交接丢件</option>
+                                <option value="未按约定提供卡车/航班">未按约定提供卡车/航班</option>
+                                <option value="落地少件（航班到达短装）">落地少件（航班到达短装）</option>
+                                <option value="货站错发/串货">货站错发/串货</option>
+                                <option value="空运丢件">空运丢件</option>
+                                <option value="货站破损/湿损">货站破损/湿损</option>
                                 <option value="时效延误">时效延误</option>
+                                <option value="国内转运丢失">国内转运丢失</option>
+                                <option value="清关延误">清关延误</option>
+                                <option value="国外转运丢件">国外转运丢件</option>
                             </select>
                         </div>
                     </div>
@@ -4064,12 +4320,10 @@
                         <label class="block text-sm font-medium text-gray-700 mb-2">索赔原因 <span class="text-red-500">*</span></label>
                         <select id="lastmile-add-reason" class="w-full px-4 py-2 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm">
                             <option value="">请选择</option>
-                            <option value="派送损坏">派送损坏</option>
-                            <option value="签收异常">签收异常</option>
-                            <option value="丢失">丢失</option>
-                            <option value="破损">破损</option>
-                            <option value="延误">延误</option>
-                            <option value="派送失败">派送失败</option>
+                            <option value="尾程断更">尾程断更</option>
+                            <option value="尾程丢失">尾程丢失</option>
+                            <option value="虚假签收">虚假签收</option>
+                            <option value="派送超时">派送超时</option>
                         </select>
                     </div>
                     <!-- 索赔标准 -->
@@ -4476,7 +4730,7 @@
                 matchStatus: '有索赔无赔付', matchStatusClass: 'bg-yellow-100 text-yellow-700',
                 claimDetails: [],
                 supplierDetails: [
-                    { id:'CLA0000001', source:'干线', sourceClass:'bg-blue-100 text-blue-700', allocationId:'ATD0000001', docType:'正常索赔', docTypeClass:'bg-green-100 text-green-700', claimType:'异常索赔', claimTypeClass:'bg-blue-100 text-blue-700', reason:'运输损坏', waybillNo:'WY202605280001', boxNo:'SZCWC26052800486', currency:'USD', amountOrig:'500.00', rate:'7.2500', amountCNY:'3,625.00', confirmCurrency:'USD', confirmAmountOrig:'480.00', confirmRate:'7.2500', confirmAmountCNY:'3,480.00', diffCNY:'145.00', createTime:'2026-05-28 10:00:00', updateTime:'2026-05-28 14:30:00' },
+                    { id:'CLA0000001', source:'干线', sourceClass:'bg-blue-100 text-blue-700', allocationId:'DA20260608000001', docType:'正常索赔', docTypeClass:'bg-green-100 text-green-700', claimType:'异常索赔', claimTypeClass:'bg-blue-100 text-blue-700', reason:'空运丢件', waybillNo:'WY202605280001', boxNo:'SZCWC26052800486', currency:'USD', amountOrig:'500.00', rate:'7.2500', amountCNY:'3,625.00', confirmCurrency:'USD', confirmAmountOrig:'480.00', confirmRate:'7.2500', confirmAmountCNY:'3,480.00', diffCNY:'145.00', createTime:'2026-05-28 10:00:00', updateTime:'2026-05-28 14:30:00' },
                     { id:'CLD20260608000001', source:'尾程', sourceClass:'bg-orange-100 text-orange-700', allocationId:'-', docType:'正常索赔', docTypeClass:'bg-green-100 text-green-700', claimType:'异常索赔', claimTypeClass:'bg-blue-100 text-blue-700', reason:'派送超时', waybillNo:'-', boxNo:'-', currency:'USD', amountOrig:'200.00', rate:'7.2500', amountCNY:'1,450.00', confirmCurrency:'USD', confirmAmountOrig:'150.00', confirmRate:'7.2500', confirmAmountCNY:'1,087.50', diffCNY:'362.50', createTime:'2026-05-28 11:00:00', updateTime:'2026-05-28 15:00:00' }
                 ]
             },
@@ -4493,7 +4747,7 @@
                     { id:'PYC20260608000005', docType:'正常赔付', docTypeClass:'bg-green-100 text-green-700', claimType:'异常赔付', claimTypeClass:'bg-blue-100 text-blue-700', reason:'尾程丢失', currency:'USD', amountOrig:'50.00', rate:'7.2500', amountCNY:'362.50', appealOrig:'-', appealRate:'-', appealCNY:'-', createTime:'2026-05-28 10:00:00', updateTime:'2026-05-28 14:30:00' }
                 ],
                 supplierDetails: [
-                    { id:'CLA0000005', source:'干线', sourceClass:'bg-blue-100 text-blue-700', allocationId:'ATD0000005', docType:'正常索赔', docTypeClass:'bg-green-100 text-green-700', claimType:'异常索赔', claimTypeClass:'bg-blue-100 text-blue-700', reason:'运输损坏', waybillNo:'WY202605280005', boxNo:'SZCWC26052800488', currency:'USD', amountOrig:'68.97', rate:'7.2500', amountCNY:'500.00', confirmCurrency:'USD', confirmAmountOrig:'68.97', confirmRate:'7.2500', confirmAmountCNY:'500.00', diffCNY:'0.00', createTime:'2026-05-28 10:00:00', updateTime:'2026-05-28 14:30:00' }
+                    { id:'CLA0000005', source:'干线', sourceClass:'bg-blue-100 text-blue-700', allocationId:'DA20260608000005', docType:'正常索赔', docTypeClass:'bg-green-100 text-green-700', claimType:'异常索赔', claimTypeClass:'bg-blue-100 text-blue-700', reason:'空运丢件', waybillNo:'WY202605280005', boxNo:'SZCWC26052800488', currency:'USD', amountOrig:'68.97', rate:'7.2500', amountCNY:'500.00', confirmCurrency:'USD', confirmAmountOrig:'68.97', confirmRate:'7.2500', confirmAmountCNY:'500.00', diffCNY:'0.00', createTime:'2026-05-28 10:00:00', updateTime:'2026-05-28 14:30:00' }
                 ]
             }
         };
