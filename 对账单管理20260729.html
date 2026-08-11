@@ -83,16 +83,6 @@ body { display: flex; flex-direction: column; }
     flex-direction: column;
     flex-shrink: 0;
 }
-.sb-header {
-    height: 40px;
-    line-height: 40px;
-    padding-left: 16px;
-    background: #eef1f6;
-    font-size: 14px;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 1px solid #e6e6e6;
-}
 .sb-menu { list-style: none; padding: 4px 0; }
 .sb-menu li {
     height: 40px;
@@ -152,32 +142,6 @@ body { display: flex; flex-direction: column; }
 /* 汇总卡片 */
 
 
-/* 块级区域 */
-.block-section {
-    background: #fff;
-    border: 1px solid #ebeef5;
-    border-radius: 3px;
-    margin-bottom: 12px;
-    padding: 16px 20px;
-}
-.block-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #303133;
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ebeef5;
-}
-.block-title .badge {
-    display: inline-block;
-    padding: 1px 7px;
-    font-size: 11px;
-    border-radius: 3px;
-    margin-left: 6px;
-}
-.badge-blue { background: #ecf5ff; color: #409eff; }
-.badge-orange { background: #fdf6ec; color: #e6a23c; }
-
 /* 小计/合计行样式 */
 .data-table tr.subtotal-row td {
     background: #f5f7fa;
@@ -189,9 +153,6 @@ body { display: flex; flex-direction: column; }
     font-weight: 700;
     color: #e74c3c;
     border-top: 2px solid #e74c3c;
-}
-.data-table tr.red-row td {
-    color: #e74c3c;
 }
 
 /* 弹窗遮罩 */
@@ -278,15 +239,6 @@ body { display: flex; flex-direction: column; }
 .locked-no { background: #e1f3d8; color: #67c23a; }
 .locked-done { background: #d9ecff; color: #409eff; }
 
-/* 天数警告 */
-.age-warn {
-    color: #e6a23c;
-    font-weight: 600;
-}
-.age-pass {
-    color: #67c23a;
-}
-
 /* ===== 内容区 ===== */
 .page-content {
     flex: 1;
@@ -295,24 +247,6 @@ body { display: flex; flex-direction: column; }
 }
 .page-view { display: none; }
 .page-view.active { display: block; }
-
-.page-breadcrumb {
-    font-size: 13px;
-    color: #999;
-    margin-bottom: 12px;
-}
-.page-breadcrumb a { color: #e74c3c; text-decoration: none; }
-.page-breadcrumb a:hover { text-decoration: underline; }
-.page-title-bar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-}
-.page-title-bar h2 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-}
 
 /* ===== 账单列表 ===== */
 .page-top {
@@ -499,8 +433,8 @@ body { display: flex; flex-direction: column; }
 /* 对账单ID 查询块：固定占第 1 列并纵向跨 3 行，由批量文本框撑满该列 */
 .filter-field.rec-id-field { grid-column: 1; grid-row: 1 / span 3; }
 .filter-field.rec-id-field .f-textarea { flex: 1; }
-/* 对账明细底表：ID批量输入跨 4 行，对齐到实际供应商 */
-.filter-field.rec-id-field.rec-base-id { grid-row: 1 / span 4; }
+/* 对账明细底表：ID批量输入跨 3 行，对齐到供应商 */
+.filter-field.rec-id-field.rec-base-id { grid-row: 1 / span 3; }
 
 /* 时间类型 + 日期范围 组合（第一行右侧，跨 2 列，右端与「是否生成账单」对齐；最右列放供应商） */
 .filter-field.time-field { grid-column: span 2; }
@@ -527,19 +461,6 @@ body { display: flex; flex-direction: column; }
     .cur-field { grid-column: auto; }
     .filter-field.filter-actions { grid-column: 1 / -1; align-items: flex-end; }
 }
-.f-input-wrap {
-    position: relative;
-    display: inline-block;
-}
-.f-input-arrow {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 10px;
-    color: #c0c4cc;
-    pointer-events: none;
-}
 .f-date-range {
     display: flex;
     align-items: center;
@@ -549,21 +470,6 @@ body { display: flex; flex-direction: column; }
     color: #909399;
     font-size: 12px;
 }
-.btn-query-icon {
-    width: 32px;
-    height: 32px;
-    background: #409eff;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.btn-query-icon:hover { background: #66b1ff; }
 
 .btn-query {
     height: 30px;
@@ -656,6 +562,11 @@ body { display: flex; flex-direction: column; }
 }
 .export-tip-wrap:hover .export-tip {
     display: block;
+}
+/* 表头tooltip：向上显示，每行规则不折行（配合容器overflow:visible避免裁剪） */
+.export-tip-wrap.th-tip .export-tip {
+    max-width: none;
+    white-space: nowrap;
 }
 
 .data-table {
@@ -838,20 +749,6 @@ body { display: flex; flex-direction: column; }
     cursor: pointer;
 }
 .file-link:hover { text-decoration: underline; }
-.file-tag {
-    display: inline-block;
-    padding: 1px 6px;
-    border-radius: 3px;
-    font-size: 11px;
-    margin-left: 8px;
-}
-.tag-success { background: #e1f3d8; color: #67c23a; }
-.tag-error { background: #fde2e2; color: #f56c6c; }
-.file-desc {
-    color: #f56c6c;
-    font-size: 11px;
-    margin-left: 8px;
-}
 .type-tag {
     display: inline-block;
     padding: 2px 8px;
@@ -946,11 +843,8 @@ body { display: flex; flex-direction: column; }
 /* 草稿状态 */
 .status-draft { background: #fff3e0; color: #e65100; }
 /* 可编辑字段 */
-.info-editable { border-bottom: 1px dashed #aaa; display: inline-block; min-width: 60px; }
-.info-readonly { color: #999; }
 .info-input { border: 1px solid #d9d9d9; border-radius: 3px; padding: 4px 8px; font-size: 13px; width: 160px; }
 .info-input:focus { border-color: #409eff; outline: none; box-shadow: 0 0 0 2px rgba(64,158,255,0.2); }
-.info-select { border: 1px solid #d9d9d9; border-radius: 3px; padding: 4px 6px; font-size: 13px; }
 /* 文件导入行 */
 .file-upload-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
 .file-name-display { color: #1a56db; max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -958,7 +852,6 @@ body { display: flex; flex-direction: column; }
 .file-status-processing { background: #e6f7ff; color: #1890ff; border: 1px solid #91d5ff; }
 .file-status-success { background: #f0f9eb; color: #67c23a; border: 1px solid #c2e7b0; }
 .file-status-error { background: #fde2e2; color: #f56c6c; border: 1px solid #fbc4c4; }
-.file-hint { color: #999; font-size: 12px; }
 /* 账单文件标签（非草稿态） */
 .bill-file-tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; margin-left: 6px; }
 .bill-file-tag-ok { background: #f0f9eb; color: #67c23a; }
@@ -968,11 +861,13 @@ body { display: flex; flex-direction: column; }
 .diff-tag-amount { background: #fde2e2; color: #e74c3c; }
 .diff-tag-ok { background: #f0f9eb; color: #67c23a; }
 .diff-tag-none { background: #f5f5f5; color: #999; }
+.diff-tag-currency { background: #fdf6ec; color: #e6a23c; }
 /* 作废标记 */
 .void-yes { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #fde2e2; color: #e74c3c; }
 .void-no { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #f0f9eb; color: #67c23a; }
 /* 明细状态 */
 .ms-new { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #eef1f6; color: #8a94a6; }
+.ms-comparing { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #ecf5ff; color: #409eff; border: 1px solid #d9ecff; }
 .ms-pending { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #fdf6ec; color: #e6a23c; }
 .ms-done { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #f0f9eb; color: #67c23a; }
 .ms-changed { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #fef0f0; color: #f56c6c; }
@@ -1052,7 +947,7 @@ body { display: flex; flex-direction: column; }
         </div>
         <div class="filter-field">
             <label class="f-label">供应商</label>
-            <select class="f-select"><option>全部</option><option>SHAOKE</option><option>DHL_ECOMMERCE</option><option>TAIJIA</option></select>
+            <select class="f-select"><option value="">全部</option><option value="H30005">H30005 SHAOKE物流</option><option value="H30001">H30001 DHL电子商务</option><option value="H30003">H30003 泰嘉物流</option></select>
         </div>
         <div class="filter-field">
             <label class="f-label">账单状态</label>
@@ -1099,7 +994,7 @@ body { display: flex; flex-direction: column; }
         <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
             <div class="action-btns">
-                <button class="btn-query">查询</button>
+                <button class="btn-query" onclick="alert('查询（演示）')">查询</button>
                 <button class="btn-cancel" type="button" onclick="resetFilter()">重置</button>
             </div>
         </div>
@@ -1119,7 +1014,7 @@ body { display: flex; flex-direction: column; }
             <thead>
                 <tr>
                     <th style="width:36px;text-align:center;"><input type="checkbox" class="rec-check-all" id="recCheckAll"></th>
-                    <th>对账单ID</th><th>供应商</th><th>账单类型</th><th>币种</th><th>状态</th>
+                    <th>对账单ID</th><th>供应商编码</th><th>供应商名称</th><th>账单类型</th><th>币种</th><th>状态</th>
                     <th>是否生成账单</th><th>账单管理ID</th><th>供应商账单ID</th><th>账单日期</th>
                     <th>会计期间</th><th>账单开始</th><th>账单结束</th><th>账单金额</th>
                     <th>计算金额</th><th>付款金额</th><th>创建人</th><th>创建时间</th>
@@ -1129,7 +1024,7 @@ body { display: flex; flex-direction: column; }
                 <tr>
                     <td style="text-align:center;"><input type="checkbox" class="rec-check"></td>
                     <td><a class="link-blue rec-list-id">RC20260608003</a></td>
-                    <td>TAIJIA</td><td>香港空运</td><td>CNY</td>
+                    <td>H30003</td><td>泰嘉物流</td><td>香港空运</td><td>CNY</td>
                     <td><span class="status-tag status-draft">草稿</span></td>
                     <td><span class="void-no">否</span></td><td>-</td><td>SF20260606</td><td>2026-06-06</td>
                     <td>2026-06</td><td>-</td><td>-</td><td>500.00</td>
@@ -1138,7 +1033,7 @@ body { display: flex; flex-direction: column; }
                 <tr>
                     <td style="text-align:center;"><input type="checkbox" class="rec-check"></td>
                     <td><a class="link-blue rec-list-id">RC20260608002</a></td>
-                    <td>DHL_ECOMMERCE</td><td>国外转运</td><td>USD</td>
+                    <td>H30001</td><td>DHL电子商务</td><td>国外转运</td><td>USD</td>
                     <td><span class="status-tag status-pending">待对账</span></td>
                     <td><span class="void-no">否</span></td><td>-</td><td>DH20260607</td><td>2026-06-07</td>
                     <td>2026-06</td><td>2026-06-01</td><td>2026-06-30</td><td>2,300.00</td>
@@ -1147,7 +1042,7 @@ body { display: flex; flex-direction: column; }
                 <tr>
                     <td style="text-align:center;"><input type="checkbox" class="rec-check"></td>
                     <td><a class="link-blue rec-list-id">RC20260608004</a></td>
-                    <td>SHAOKE</td><td>国内转运</td><td>CNY</td>
+                    <td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>CNY</td>
                     <td><span class="status-tag status-review">对账中</span></td>
                     <td><span class="void-no">否</span></td><td>-</td><td>H30008</td><td>2026-06-05</td>
                     <td>2026-06</td><td>2026-06-01</td><td>2026-06-30</td><td>800.00</td>
@@ -1156,7 +1051,7 @@ body { display: flex; flex-direction: column; }
                 <tr>
                     <td style="text-align:center;"><input type="checkbox" class="rec-check"></td>
                     <td><a class="link-blue rec-list-id">RC20260608001</a></td>
-                    <td>SHAOKE</td><td>尾程派送</td><td>EUR</td>
+                    <td>H30005</td><td>SHAOKE物流</td><td>尾程派送</td><td>EUR</td>
                     <td><span class="status-tag status-done">已完成</span></td>
                     <td>是</td><td>B20260608001</td><td>H30005</td><td>2026-06-08</td>
                     <td>2026-06</td><td>2026-06-01</td><td>2026-06-30</td><td>1,000.00</td>
@@ -1182,7 +1077,7 @@ body { display: flex; flex-direction: column; }
             <span class="back-link" onclick="switchView('recList')">&lt; 返回列表</span>
             <h2 class="detail-title">对账单详情</h2>
         </div>
-        <span class="detail-breadcrumb"><a class="link-blue" onclick="switchView('recManage')" style="cursor:pointer;">对账管理</a> &gt; 对账单详情</span>
+        <span class="detail-breadcrumb"><a class="link-blue" onclick="switchView('recList')" style="cursor:pointer;">对账管理</a> &gt; 对账单详情</span>
     </div>
 
     <div class="detail-section">
@@ -1190,11 +1085,11 @@ body { display: flex; flex-direction: column; }
         <div class="info-grid-2col">
             <div class="info-row-2col">
                 <div class="info-item-2col info-ro"><span class="info-label-2col">ID</span><span class="info-value-2col">RC20260608001</span></div>
-                <div class="info-item-2col info-ro"><span class="info-label-2col">供应商</span><span class="info-value-2col">SHAOKE</span></div>
+                <div class="info-item-2col info-ro"><span class="info-label-2col">供应商</span><span class="info-value-2col">H30005 SHAOKE物流</span></div>
             </div>
             <div class="info-row-2col">
                 <div class="info-item-2col info-ro"><span class="info-label-2col">供应商账单ID</span><span class="info-value-2col">H30005</span></div>
-                <div class="info-item-2col info-ro"><span class="info-label-2col">状态</span><span class="status-tag status-pending" id="detailStatusTag">待对账</span></div>
+                <div class="info-item-2col info-ro"><span class="info-label-2col">状态</span><span class="status-tag status-review" id="detailStatusTag">对账中</span></div>
             </div>
             <div class="info-row-2col">
                 <div class="info-item-2col info-ro"><span class="info-label-2col">是否生成账单</span><span class="info-value-2col" id="val-BillGenerated">否</span></div>
@@ -1382,7 +1277,7 @@ body { display: flex; flex-direction: column; }
         </div>
         <div class="filter-field">
             <label class="f-label">明细状态</label>
-            <select class="f-select"><option value="">全部</option><option>新创建</option><option>待处理</option><option>已处理</option><option>已变更待复核</option></select>
+            <select class="f-select"><option value="">全部</option><option>系统对比中</option><option>待处理</option><option>已处理</option><option>已变更待复核</option></select>
         </div>
         <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
@@ -1398,6 +1293,7 @@ body { display: flex; flex-direction: column; }
             <div class="op-module-body">
                 <select class="f-select" style="width:170px;" id="settleStrategySelect">
                     <option value="">请选择结算策略</option>
+                    <option value="0">空</option>
                     <option value="1">按账单金额支付+争议</option>
                     <option value="2">按账单金额支付+不争议</option>
                     <option value="3" id="opt-strategy-3">按系统金额支付+争议 <span style="color:#e74c3c;">(对账币种不一致时不可选)</span></option>
@@ -1427,44 +1323,44 @@ body { display: flex; flex-direction: column; }
         <div style="overflow-x:auto;">
         <table class="data-table" style="width:100%;">
             <thead>
-                <tr><th style="width:40px;"><input type="checkbox"></th><th>明细ID</th><th>账单类型</th><th>系统ID</th><th>费用项</th><th>费用项编码</th><th>账单金额</th><th>快照计算金额</th><th>计算差异</th><th>差异类型</th><th>结算策略</th><th>付款金额</th><th>账单明细对比</th><th>对账单ID</th><th>作废标记</th><th>明细状态</th></tr>
+                <tr><th style="width:40px;"><input type="checkbox"></th><th>明细ID</th><th>账单类型</th><th>系统ID</th><th>费用项</th><th>费用项编码</th><th>币种</th><th>账单金额</th><th>快照计算金额</th><th>计算差异</th><th>差异类型</th><th>结算策略</th><th>付款金额</th><th>账单明细对比</th><th>对账单ID</th><th>作废标记</th><th>明细状态</th></tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201001</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299889YQ001</td><td>基础运费</td><td>LastMileBasicFreight</td><td>500CNY</td><td>480CNY</td><td style="color:#e74c3c;">20CNY</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按账单金额支付+争议</td><td>500CNY</td><td>计费重 账单:100kg 计算:95kg 差异:5.26%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-new">新创建</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201001</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299889YQ001</td><td>基础运费</td><td>LastMileBasicFreight</td><td>CNY</td><td>500</td><td>480</td><td style="color:#e74c3c;">20</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按账单金额支付+争议</td><td>500</td><td>计费重 账单:100kg 计算:95kg 差异:5.26%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-comparing">系统对比中</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201002</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299890YQ001</td><td>燃油附加费</td><td>LastMileFuelSurcharge</td><td>80CNY</td><td>75CNY</td><td style="color:#e74c3c;">5CNY</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按系统金额支付+不争议</td><td>75CNY</td><td>计费重 账单:50kg 计算:46.875kg 差异:6.67%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-pending">待处理</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201002</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299890YQ001</td><td>燃油附加费</td><td>LastMileFuelSurcharge</td><td>CNY</td><td>80</td><td>75</td><td style="color:#e74c3c;">5</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按系统金额支付+不争议</td><td>75</td><td>计费重 账单:50kg 计算:46.875kg 差异:6.67%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-pending">待处理</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201003</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299891YQ001</td><td>提送货费</td><td>LastMilePickupDeliveryFee</td><td>300CNY</td><td>299.5CNY</td><td style="color:#e74c3c;">0.5CNY</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按账单金额支付+不争议</td><td>300CNY</td><td>计费重 账单:80kg 计算:80kg 差异:0%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-done">已处理</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201003</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299891YQ001</td><td>提送货费</td><td>LastMilePickupDeliveryFee</td><td>CNY</td><td>300</td><td>299.5</td><td style="color:#e74c3c;">0.5</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按账单金额支付+不争议</td><td>300</td><td>计费重 账单:80kg 计算:80kg 差异:0%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-done">已处理</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201004</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299892YQ001</td><td>派送费</td><td>LastMileDeliveryCharge</td><td>120CNY</td><td>125CNY</td><td style="color:#27ae60;">-5CNY</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按系统金额支付+争议</td><td>125CNY</td><td>计费重 账单:30kg 计算:31.25kg 差异:-4.00%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-pending">待处理</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201004</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299892YQ001</td><td>派送费</td><td>LastMileDeliveryCharge</td><td>CNY</td><td>120</td><td>125</td><td style="color:#27ae60;">-5</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按系统金额支付+争议</td><td>125</td><td>计费重 账单:30kg 计算:31.25kg 差异:-4.00%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-pending">待处理</span></td>
                 </tr>
                 <tr class="row-void" data-void="1">
-                    <td><input type="checkbox"></td><td>BZD20251201005</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299893YQ001</td><td>报关费</td><td>LastMileCustomsFee</td><td>200CNY</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-none">费用项无计费</span></td><td data-nostrategy>-</td><td>-</td><td>-</td><td>RC20260608001</td><td><span class="void-yes">作废</span></td><td><span class="ms-done">已处理</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201005</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299893YQ001</td><td>报关费</td><td>LastMileCustomsFee</td><td>CNY</td><td>200</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-none">费用项无计费</span></td><td data-nostrategy>-</td><td>-</td><td>-</td><td>RC20260608001</td><td><span class="void-yes">作废</span></td><td><span class="ms-done">已处理</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201006</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299894YQ001</td><td>仓储费</td><td>LastMileStorageFee</td><td>150CNY</td><td>140CNY</td><td style="color:#e74c3c;">10CNY</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按账单金额支付+争议</td><td>150CNY</td><td>计费重 账单:60kg 计算:56kg 差异:7.14%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-pending">待处理</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201006</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299894YQ001</td><td>仓储费</td><td>LastMileStorageFee</td><td>CNY</td><td>150</td><td>140</td><td style="color:#e74c3c;">10</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按账单金额支付+争议</td><td>150</td><td>计费重 账单:60kg 计算:56kg 差异:7.14%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-pending">待处理</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201007</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299895YQ001</td><td>保险费</td><td>LastMileInsuranceFee</td><td>20CNY</td><td>20CNY</td><td style="color:#27ae60;">0CNY</td><td><span class="diff-tag diff-tag-ok">无差异</span></td><td>按账单金额支付+不争议</td><td>20CNY</td><td>计费重 账单:40kg 计算:40kg 差异:0%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-done">已处理</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201007</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299895YQ001</td><td>保险费</td><td>LastMileInsuranceFee</td><td>CNY</td><td>20</td><td>20</td><td style="color:#27ae60;">0</td><td><span class="diff-tag diff-tag-ok">无差异</span></td><td>按账单金额支付+不争议</td><td>20</td><td>计费重 账单:40kg 计算:40kg 差异:0%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-done">已处理</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201008</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299896YQ001</td><td>偏远费</td><td>LastMileRemoteAreaFee</td><td>80CNY</td><td>79.8CNY</td><td style="color:#e74c3c;">0.2CNY</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按账单金额支付+不争议</td><td>80CNY</td><td>计费重 账单:25kg 计算:24.9375kg 差异:0.25%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-pending">待处理</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201008</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299896YQ001</td><td>偏远费</td><td>LastMileRemoteAreaFee</td><td>CNY</td><td>80</td><td>79.8</td><td style="color:#e74c3c;">0.2</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td>按账单金额支付+不争议</td><td>80</td><td>计费重 账单:25kg 计算:24.9375kg 差异:0.25%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-pending">待处理</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201009</td><td><span class="type-tag">尾程派送</span></td><td>-</td><td>操作费</td><td>LastMileHandlingFee</td><td>50CNY</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-none">成本系统无单据</span></td><td>不支付+争议</td><td>0CNY</td><td>-</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-new">新创建</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201009</td><td><span class="type-tag">尾程派送</span></td><td>-</td><td>操作费</td><td>LastMileHandlingFee</td><td>CNY</td><td>50</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-none">成本系统无单据</span></td><td>不支付+争议</td><td>0</td><td>-</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-comparing">系统对比中</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201010</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299898YQ001</td><td>过路费</td><td>LastMileTollFee</td><td>30CNY</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-none">费用项无计费</span></td><td>-</td><td>-</td><td>-</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-new">新创建</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201010</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299898YQ001</td><td>过路费</td><td>LastMileTollFee</td><td>CNY</td><td>30</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-none">费用项无计费</span></td><td>-</td><td>-</td><td>-</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-comparing">系统对比中</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201011</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299899YQ001</td><td>基础运费</td><td>LastMileBasicFreight</td><td>200CNY</td><td>205CNY</td><td style="color:#e74c3c;">-5CNY</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td data-nostrategy>-</td><td>-</td><td>计费重 账单:120kg 计算:118kg 差异:1.69%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-changed">已变更待复核</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201011</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238299899YQ001</td><td>基础运费</td><td>LastMileBasicFreight</td><td>CNY</td><td>200</td><td>205</td><td style="color:#e74c3c;">-5</td><td><span class="diff-tag diff-tag-amount">金额差异</span></td><td data-nostrategy>-</td><td>-</td><td>计费重 账单:120kg 计算:118kg 差异:1.69%</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-changed">已变更待复核</span></td>
                 </tr>
                 <tr>
-                    <td><input type="checkbox"></td><td>BZD20251201012</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238300000YQ001</td><td>报关费</td><td>LastMileCustomsFee</td><td>90CNY</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-currency">对账币种不一致</span></td><td>-</td><td>-</td><td>-</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-new">新创建</span></td>
+                    <td><input type="checkbox"></td><td>BZD20251201012</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238300000YQ001</td><td>报关费</td><td>LastMileCustomsFee</td><td>CNY</td><td>90</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-currency">对账币种不一致</span></td><td>-</td><td>-</td><td>-</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-comparing">系统对比中</span></td>
                 </tr>
                 </tr>
             </tbody>
@@ -1545,40 +1441,36 @@ body { display: flex; flex-direction: column; }
             <select class="f-select"><option value="">全部</option><option>未确认</option><option>按账单金额支付+争议</option><option>按账单金额支付+不争议</option><option>按系统金额支付+争议</option><option>按系统金额支付+不争议</option><option>不支付+争议</option><option>不支付+不争议</option><option>清账</option></select>
         </div>
         <div class="filter-field">
-            <label class="f-label">系统供应商</label>
-            <select class="f-select"><option value="">全部</option><option>H30005 SHAOKE物流</option><option>H30001 DHL_ECOMMERCE</option><option>H30003 TAIJIA</option></select>
-        </div>
-        <div class="filter-field">
-            <label class="f-label">实际供应商</label>
-            <select class="f-select"><option value="">全部</option><option>H30005 SHAOKE物流</option><option>H30001 DHL_ECOMMERCE</option><option>H30003 TAIJIA</option></select>
+            <label class="f-label">供应商</label>
+            <select class="f-select"><option value="">全部</option><option>H30005 SHAOKE物流</option><option>H30001 DHL电子商务</option><option>H30003 泰嘉物流</option></select>
         </div>
         <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
             <div class="action-btns">
-                <button class="btn-query">查询</button>
-                <button class="btn-query-outline">导出Excel</button>
+                <button class="btn-query" onclick="alert('查询（演示）')">查询</button>
+                <button class="btn-query-outline" onclick="alert('导出Excel（演示）')">导出Excel</button>
             </div>
         </div>
     </div>
     <div class="table-area">
-        <div class="table-toolbar"><div class="toolbar-left"><span style="font-size:12px;color:#909399;">底表以「系统ID+费用项+币种」为主键维度，同一维度可存在多条记录；最新计算金额按主键唯一，只挂在最早创建的记录上（追加记录为空）</span></div><div class="toolbar-right"><button class="btn-export">导出Excel</button></div></div>
+        <div class="table-toolbar"><div class="toolbar-left"><span style="font-size:12px;color:#909399;">底表以「供应商编码+系统ID+费用项+币种」为主键维度，按供应商隔离，同一维度可存在多条记录；最新计算金额按主键唯一，只挂在最早创建的记录上（追加记录为空）</span></div><div class="toolbar-right"><button class="btn-export" onclick="alert('导出Excel（演示）')">导出Excel</button></div></div>
         <div style="overflow-x:auto;">
         <table class="data-table">
             <thead><tr>
                 <th>底表明细ID</th><th>对账单ID</th><th>对账单明细ID</th><th>系统ID</th><th>费用项</th><th>币种</th>
                 <th>账单金额</th><th>最新计算金额</th><th>快照计算金额</th><th>差异类型</th><th>结算策略</th><th>付款金额</th>
-                <th>创建时间</th><th>会计期间</th><th>系统供应商编码</th><th>系统供应商名称</th><th>实际供应商编码</th><th>实际供应商名称</th>
+                <th>创建时间</th><th>会计期间</th><th>供应商编码</th><th>供应商名称</th>
                 <th>账单类型</th><th>单据时间</th><th>费用项编码</th><th>锁定状态</th>
             </tr></thead>
             <tbody>
-                <tr><td>R001</td><td>RC20260608001</td><td>BZ001</td><td>YD001</td><td>燃油费</td><td>CNY</td><td>520</td><td>550</td><td>500</td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+争议</td><td>520</td><td>2026-06-01 10:00</td><td>2026-06</td><td>H30005</td><td>SHAOKE物流</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td><span class="locked-tag locked-yes">已锁定</span></td></tr>
-                <tr><td>R002</td><td>RC20260608001</td><td>BZ003</td><td>YD001</td><td>燃油费</td><td>CNY</td><td>30</td><td>-</td><td>-</td><td><span class="status-tag status-reject">本次账单重复</span></td><td>不支付+争议</td><td>0</td><td>2026-06-05 14:30</td><td>2026-06</td><td>H30005</td><td>SHAOKE物流</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td><span class="locked-tag locked-yes">已锁定</span></td></tr>
-                <tr><td>R003</td><td>RC20260608001</td><td>BZ002</td><td>YD001</td><td>燃油费</td><td>USD</td><td>72</td><td>75</td><td>75</td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+不争议</td><td>72</td><td>2026-06-01 10:00</td><td>2026-06</td><td>H30005</td><td>SHAOKE物流</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
-                <tr><td>R004</td><td>-</td><td>-</td><td>YD001</td><td>装卸费</td><td>CNY</td><td>-</td><td>120</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>-</td><td>-</td><td>国内转运</td><td>2026-05-20</td><td>ZXF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R005</td><td>-</td><td>-</td><td>YD001</td><td>清关费</td><td>CNY</td><td>-</td><td>430</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30001</td><td>DHL_ECOMMERCE</td><td>-</td><td>-</td><td>国外清关</td><td>2026-05-21</td><td>QGF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R006</td><td>RC20260608001</td><td>BZ004</td><td>YD001</td><td>仓储费</td><td>CNY</td><td>80</td><td>-</td><td>-</td><td><span class="status-tag status-reject">费用项无计费</span></td><td>不支付+不争议</td><td>0</td><td>2026-06-06 09:15</td><td>2026-06</td><td>H30005</td><td>SHAOKE物流</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>CCF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
-                <tr><td>R007</td><td>-</td><td>-</td><td>YD002</td><td>基础运费</td><td>CNY</td><td>-</td><td>350</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-02 08:00</td><td>-</td><td>H30003</td><td>TAIJIA</td><td>-</td><td>-</td><td>内地空运</td><td>2026-05-22</td><td>JCYF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R008</td><td>RC20260608002</td><td>BZ005</td><td>YD002</td><td>燃油附加费</td><td>CNY</td><td>90</td><td>85</td><td>85</td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>90</td><td>2026-06-02 08:00</td><td>2026-06</td><td>H30003</td><td>TAIJIA</td><td>H30003</td><td>TAIJIA</td><td>内地空运</td><td>2026-05-22</td><td>RYFJF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
+                <tr><td>R001</td><td>RC20260608001</td><td>BZ001</td><td>YD001</td><td>燃油费</td><td>CNY</td><td>520</td><td>550</td><td>500</td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+争议</td><td>520</td><td>2026-06-01 10:00</td><td>2026-06</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td><span class="locked-tag locked-yes">已锁定</span></td></tr>
+                <tr><td>R002</td><td>RC20260608001</td><td>BZ003</td><td>YD001</td><td>燃油费</td><td>CNY</td><td>30</td><td>-</td><td>-</td><td><span class="status-tag status-reject">本次账单重复</span></td><td>不支付+争议</td><td>0</td><td>2026-06-05 14:30</td><td>2026-06</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td><span class="locked-tag locked-yes">已锁定</span></td></tr>
+                <tr><td>R003</td><td>RC20260608001</td><td>BZ002</td><td>YD001</td><td>燃油费</td><td>USD</td><td>72</td><td>75</td><td>75</td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+不争议</td><td>72</td><td>2026-06-01 10:00</td><td>2026-06</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
+                <tr><td>R004</td><td>-</td><td>-</td><td>YD001</td><td>装卸费</td><td>CNY</td><td>-</td><td>120</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>ZXF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
+                <tr><td>R005</td><td>-</td><td>-</td><td>YD001</td><td>清关费</td><td>CNY</td><td>-</td><td>430</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td>2026-05-21</td><td>QGF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
+                <tr><td>R006</td><td>RC20260608001</td><td>BZ004</td><td>YD001</td><td>仓储费</td><td>CNY</td><td>80</td><td>-</td><td>-</td><td><span class="status-tag status-reject">费用项无计费</span></td><td>不支付+不争议</td><td>0</td><td>2026-06-06 09:15</td><td>2026-06</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>CCF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
+                <tr><td>R007</td><td>-</td><td>-</td><td>YD002</td><td>基础运费</td><td>CNY</td><td>-</td><td>350</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-02 08:00</td><td>-</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>JCYF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
+                <tr><td>R008</td><td>RC20260608002</td><td>BZ005</td><td>YD002</td><td>燃油附加费</td><td>CNY</td><td>90</td><td>85</td><td>85</td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>90</td><td>2026-06-02 08:00</td><td>2026-06</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>RYFJF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
             </tbody>
         </table>
         </div>
@@ -1602,28 +1494,28 @@ body { display: flex; flex-direction: column; }
         <div class="table-toolbar"><div class="toolbar-left"><span style="font-size:12px;color:#909399;">下载是直接导出文件，这里只是展示一下下载的内容样式</span></div></div>
         <div style="overflow-x:auto;">
         <table class="data-table">
-            <thead><tr><th>差异类型</th><th>费用项名称</th><th>币种</th><th>账单金额</th><th>快照计算金额</th><th>金额差异（账单-快照）</th><th>账单金额占比</th></tr></thead>
+            <thead><tr><th>结算策略</th><th>差异类型</th><th>费用项名称</th><th>币种</th><th>账单金额</th><th>快照计算金额</th><th>金额差异（账单-快照）</th><th>账单金额占比</th></tr></thead>
             <tbody>
-                <tr><td>无差异</td><td>运费</td><td>CNY</td><td>100</td><td>100</td><td>0</td><td>21.74%</td></tr>
-                <tr><td>无差异</td><td>超尺附加费</td><td>CNY</td><td>20</td><td>20</td><td>0</td><td>4.35%</td></tr>
-                <tr class="subtotal-row"><td><strong>无差异小计</strong></td><td>-</td><td>CNY</td><td><strong>120</strong></td><td><strong>120</strong></td><td><strong>0</strong></td><td><strong>26.09%</strong></td></tr>
-                <tr><td>金额差异</td><td>运费</td><td>CNY</td><td>80</td><td>75</td><td>5</td><td>17.39%</td></tr>
-                <tr class="subtotal-row"><td><strong>金额差异小计</strong></td><td>-</td><td>CNY</td><td><strong>80</strong></td><td><strong>75</strong></td><td><strong>5</strong></td><td><strong>17.39%</strong></td></tr>
-                <tr><td>重量-wb＞cp</td><td>尾程运费</td><td>CNY</td><td>60</td><td>50</td><td>10</td><td>13.04%</td></tr>
-                <tr class="subtotal-row"><td><strong>重量-wb＞cp小计</strong></td><td>-</td><td>CNY</td><td><strong>60</strong></td><td><strong>50</strong></td><td><strong>10</strong></td><td><strong>13.04%</strong></td></tr>
-                <tr><td>重量-wb＜cp</td><td>尾程运费</td><td>CNY</td><td>40</td><td>50</td><td>-10</td><td>8.70%</td></tr>
-                <tr class="subtotal-row"><td><strong>重量-wb＜cp小计</strong></td><td>-</td><td>CNY</td><td><strong>40</strong></td><td><strong>50</strong></td><td><strong>-10</strong></td><td><strong>8.70%</strong></td></tr>
-                <tr><td>历史已对账</td><td>运费</td><td>CNY</td><td>30</td><td>0（置换）</td><td>30</td><td>6.52%</td></tr>
-                <tr class="subtotal-row"><td><strong>历史已对账小计</strong></td><td>-</td><td>CNY</td><td><strong>30</strong></td><td><strong>0</strong></td><td><strong>30</strong></td><td><strong>6.52%</strong></td></tr>
-                <tr><td>成本系统无单据</td><td>运费</td><td>CNY</td><td>50</td><td>0（置换）</td><td>50</td><td>10.87%</td></tr>
-                <tr class="subtotal-row"><td><strong>成本系统无单据小计</strong></td><td>-</td><td>CNY</td><td><strong>50</strong></td><td><strong>0</strong></td><td><strong>50</strong></td><td><strong>10.87%</strong></td></tr>
-                <tr><td>单据无计费</td><td>运费</td><td>CNY</td><td>20</td><td>0（置换）</td><td>20</td><td>4.35%</td></tr>
-                <tr class="subtotal-row"><td><strong>单据无计费小计</strong></td><td>-</td><td>CNY</td><td><strong>20</strong></td><td><strong>0</strong></td><td><strong>20</strong></td><td><strong>4.35%</strong></td></tr>
-                <tr><td>费用项无计费</td><td>运费</td><td>CNY</td><td>10</td><td>0（置换）</td><td>10</td><td>2.17%</td></tr>
-                <tr class="subtotal-row"><td><strong>费用项无计费小计</strong></td><td>-</td><td>CNY</td><td><strong>10</strong></td><td><strong>0</strong></td><td><strong>10</strong></td><td><strong>2.17%</strong></td></tr>
-                <tr><td>对账币种不一致</td><td>运费</td><td>CNY</td><td>50</td><td>0（置换）</td><td>50</td><td>10.87%</td></tr>
-                <tr class="subtotal-row"><td><strong>对账币种不一致小计</strong></td><td>-</td><td>CNY</td><td><strong>50</strong></td><td><strong>0</strong></td><td><strong>50</strong></td><td><strong>10.87%</strong></td></tr>
-                <tr class="total-row"><td><strong>总计</strong></td><td>-</td><td>CNY</td><td><strong>460</strong></td><td><strong>295</strong></td><td><strong>165</strong></td><td><strong>100%</strong></td></tr>
+                <tr><td>按账单金额支付（不争议）</td><td>无差异</td><td>运费</td><td>CNY</td><td>100</td><td>100</td><td>0</td><td>21.74%</td></tr>
+                <tr><td>按账单金额支付（不争议）</td><td>无差异</td><td>超尺附加费</td><td>CNY</td><td>20</td><td>20</td><td>0</td><td>4.35%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>无差异小计</strong></td><td>-</td><td>CNY</td><td><strong>120</strong></td><td><strong>120</strong></td><td><strong>0</strong></td><td><strong>26.09%</strong></td></tr>
+                <tr><td>按账单金额支付（不争议）</td><td>金额差异</td><td>运费</td><td>CNY</td><td>80</td><td>75</td><td>5</td><td>17.39%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>金额差异小计</strong></td><td>-</td><td>CNY</td><td><strong>80</strong></td><td><strong>75</strong></td><td><strong>5</strong></td><td><strong>17.39%</strong></td></tr>
+                <tr><td>按系统金额支付（不争议）</td><td>重量-wb＞cp</td><td>尾程运费</td><td>CNY</td><td>60</td><td>50</td><td>10</td><td>13.04%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>重量-wb＞cp小计</strong></td><td>-</td><td>CNY</td><td><strong>60</strong></td><td><strong>50</strong></td><td><strong>10</strong></td><td><strong>13.04%</strong></td></tr>
+                <tr><td>按系统金额支付（不争议）</td><td>重量-wb＜cp</td><td>尾程运费</td><td>CNY</td><td>40</td><td>50</td><td>-10</td><td>8.70%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>重量-wb＜cp小计</strong></td><td>-</td><td>CNY</td><td><strong>40</strong></td><td><strong>50</strong></td><td><strong>-10</strong></td><td><strong>8.70%</strong></td></tr>
+                <tr><td>不支付（不争议）</td><td>历史已对账</td><td>运费</td><td>CNY</td><td>30</td><td>0（置换）</td><td>30</td><td>6.52%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>历史已对账小计</strong></td><td>-</td><td>CNY</td><td><strong>30</strong></td><td><strong>0</strong></td><td><strong>30</strong></td><td><strong>6.52%</strong></td></tr>
+                <tr><td>不支付（不争议）</td><td>成本系统无单据</td><td>运费</td><td>CNY</td><td>50</td><td>0（置换）</td><td>50</td><td>10.87%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>成本系统无单据小计</strong></td><td>-</td><td>CNY</td><td><strong>50</strong></td><td><strong>0</strong></td><td><strong>50</strong></td><td><strong>10.87%</strong></td></tr>
+                <tr><td>不支付（不争议）</td><td>单据无计费</td><td>运费</td><td>CNY</td><td>20</td><td>0（置换）</td><td>20</td><td>4.35%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>单据无计费小计</strong></td><td>-</td><td>CNY</td><td><strong>20</strong></td><td><strong>0</strong></td><td><strong>20</strong></td><td><strong>4.35%</strong></td></tr>
+                <tr><td>不支付（不争议）</td><td>费用项无计费</td><td>运费</td><td>CNY</td><td>10</td><td>0（置换）</td><td>10</td><td>2.17%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>费用项无计费小计</strong></td><td>-</td><td>CNY</td><td><strong>10</strong></td><td><strong>0</strong></td><td><strong>10</strong></td><td><strong>2.17%</strong></td></tr>
+                <tr><td>按账单金额支付（不争议）</td><td>对账币种不一致</td><td>运费</td><td>CNY</td><td>50</td><td>0（置换）</td><td>50</td><td>10.87%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>对账币种不一致小计</strong></td><td>-</td><td>CNY</td><td><strong>50</strong></td><td><strong>0</strong></td><td><strong>50</strong></td><td><strong>10.87%</strong></td></tr>
+                <tr class="total-row"><td>-</td><td><strong>总计</strong></td><td>-</td><td>CNY</td><td><strong>460</strong></td><td><strong>295</strong></td><td><strong>165</strong></td><td><strong>100%</strong></td></tr>
             </tbody>
         </table>
         </div>
@@ -1653,13 +1545,28 @@ body { display: flex; flex-direction: column; }
             </div>
         </div>
         <div class="filter-field">
-            <label class="f-label">系统供应商</label>
+            <label class="f-label">供应商</label>
             <div class="multi-select">
                 <div class="multi-trigger">请选择（多选）</div>
                 <div class="multi-panel">
                     <label><input type="checkbox" value="H30005">H30005（Test公司）</label>
                     <label><input type="checkbox" value="H30001">H30001（DHL电子商务）</label>
                     <label><input type="checkbox" value="H30003">H30003（泰嘉物流）</label>
+                </div>
+            </div>
+        </div>
+        <div class="filter-field">
+            <label class="f-label">账单类型</label>
+            <div class="multi-select">
+                <div class="multi-trigger">请选择（多选）</div>
+                <div class="multi-panel">
+                    <label><input type="checkbox" value="国内转运">国内转运</label>
+                    <label><input type="checkbox" value="内地空运">内地空运</label>
+                    <label><input type="checkbox" value="香港空运">香港空运</label>
+                    <label><input type="checkbox" value="空运卡转">空运卡转</label>
+                    <label><input type="checkbox" value="国外清关">国外清关</label>
+                    <label><input type="checkbox" value="国外转运">国外转运</label>
+                    <label><input type="checkbox" value="尾程派送">尾程派送</label>
                 </div>
             </div>
         </div>
@@ -1689,10 +1596,10 @@ body { display: flex; flex-direction: column; }
                 </div>
             </div>
         </div>
-        <div class="filter-field filter-actions" style="grid-column: 4; justify-content: flex-end; align-items: flex-end;">
+        <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
             <div class="action-btns">
-                <button class="btn-query">查询</button>
+                <button class="btn-query" onclick="alert('查询（演示）')">查询</button>
                 <button class="btn-cancel" type="button" onclick="resetClearFilter()">重置</button>
             </div>
         </div>
@@ -1700,11 +1607,10 @@ body { display: flex; flex-direction: column; }
     <!-- 页面级提示条 -->
     <div style="background:#ecf5ff;border:1px solid #d9ecff;border-radius:3px;padding:10px 16px;margin-bottom:10px;font-size:12px;color:#606266;line-height:1.8;">
         <span style="color:#409eff;font-weight:600;">ℹ️ 清账资格说明：</span>
-        本页面仅展示<b style="color:#303133;">满足清账资格</b>的记录，须同时符合4个条件：
-        ① <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">结算策略</code> 为空；
-        ② <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">对账单ID</code> 为空；
-        ③ <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">最新计算金额</code> 非空（含值为0）；
-        ④ 单据时间距今 ≥ <b>180天</b>。
+        本页面仅展示<b style="color:#303133;">满足清账资格</b>的记录，须同时符合3个条件：
+        ① <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">对账单ID</code> 为空；
+        ② <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">最新计算金额</code> 非空（含值为0）；
+        ③ 单据时间距今 ≥ <b>180天</b>。
     </div>
     <div class="table-area">
         <div class="table-toolbar">
@@ -1713,27 +1619,28 @@ body { display: flex; flex-direction: column; }
                 <button class="btn-query" onclick="showClearModal('all')">根据查询条件清账</button>
                 <span style="font-size:11px;color:#909399;margin-left:8px;">⚠ 清账为不可逆操作，提交后自动完成全流程对账</span>
             </div>
-            <div class="toolbar-right"><button class="btn-export">导出</button></div>
+            <div class="toolbar-right"><button class="btn-export" onclick="alert('导出（演示）')">导出</button></div>
         </div>
         <div style="overflow-x:auto;">
         <table class="data-table table-list">
             <thead><tr>
                 <th style="width:36px;text-align:center;"><input type="checkbox" class="clear-check-all"></th>
                 <th>系统ID</th>
-                <th>系统供应商</th>
+                <th>供应商</th>
+                <th>账单类型</th>
                 <th>费用项</th>
                 <th>币种</th>
                 <th>单据时间</th>
                 <th>最新计算金额</th>
             </tr></thead>
             <tbody>
-                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299001YQ</a></td><td>H30005</td><td>燃油附加费</td><td>CNY</td><td>2025-11-15</td><td>500.00</td></tr>
-                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299002YQ</a></td><td>H30005</td><td>基础运费</td><td>CNY</td><td>2025-10-20</td><td>1,200.00</td></tr>
-                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299003YQ</a></td><td>H30001</td><td>提送货费</td><td>USD</td><td>2025-09-05</td><td>300.00</td></tr>
-                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299004YQ</a></td><td>H30003</td><td>报关费</td><td>CNY</td><td>2025-12-28</td><td>680.00</td></tr>
-                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299005YQ</a></td><td>H30005</td><td>燃油附加费</td><td>CNY</td><td>2026-01-10</td><td>420.00</td></tr>
-                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">YN202402130001</a></td><td>H30001</td><td>派送费</td><td>CNY</td><td>2024-02-13</td><td>890.00</td></tr>
-                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299007YQ</a></td><td>H30005</td><td>基础运费</td><td>CNY</td><td>2026-02-18</td><td>1,500.00</td></tr>
+                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299001YQ</a></td><td>H30005</td><td>尾程派送</td><td>燃油附加费</td><td>CNY</td><td>2025-11-15</td><td>500.00</td></tr>
+                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299002YQ</a></td><td>H30005</td><td>尾程派送</td><td>基础运费</td><td>CNY</td><td>2025-10-20</td><td>1,200.00</td></tr>
+                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299003YQ</a></td><td>H30001</td><td>香港空运</td><td>提送货费</td><td>USD</td><td>2025-09-05</td><td>300.00</td></tr>
+                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299004YQ</a></td><td>H30003</td><td>国外清关</td><td>报关费</td><td>CNY</td><td>2025-12-28</td><td>680.00</td></tr>
+                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299005YQ</a></td><td>H30005</td><td>尾程派送</td><td>燃油附加费</td><td>CNY</td><td>2026-01-10</td><td>420.00</td></tr>
+                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">YN202402130001</a></td><td>H30001</td><td>尾程派送</td><td>派送费</td><td>CNY</td><td>2024-02-13</td><td>890.00</td></tr>
+                <tr><td style="text-align:center;"><input type="checkbox" class="clear-check"></td><td><a class="id-link">WNBAA04238299007YQ</a></td><td>H30005</td><td>国内转运</td><td>基础运费</td><td>CNY</td><td>2026-02-18</td><td>1,500.00</td></tr>
             </tbody>
         </table>
         </div>
@@ -1759,7 +1666,7 @@ body { display: flex; flex-direction: column; }
             <select class="f-select"><option value="">全部</option><option selected>2026-06</option><option>2026-05</option><option>2026-04</option></select>
         </div>
         <div class="filter-field">
-            <label class="f-label">系统供应商</label>
+            <label class="f-label">供应商</label>
             <div class="multi-select">
                 <div class="multi-trigger">请选择</div>
                 <div class="multi-panel">
@@ -1797,22 +1704,22 @@ body { display: flex; flex-direction: column; }
         <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
             <div class="action-btns">
-                <button class="btn-query">查询</button>
-                <button class="btn-reset">重置</button>
+                <button class="btn-query" onclick="alert('查询（演示）')">查询</button>
+                <button class="btn-cancel" onclick="resetFilter()">重置</button>
             </div>
         </div>
     </div>
     <div class="table-area">
-        <div class="table-toolbar"><div class="toolbar-left"><span style="font-size:12px;color:#909399;">按系统供应商→账单类型→业务期间→币种层级汇总（默认按未结算金额倒序）</span></div><div class="toolbar-right"><button class="btn-export">导出</button></div></div>
+        <div class="table-toolbar"><div class="toolbar-left"><span style="font-size:12px;color:#909399;">按业务期间→供应商→账单类型→币种层级汇总（默认按未结算金额倒序）</span></div><div class="toolbar-right"><button class="btn-export" onclick="alert('导出（演示）')">导出</button></div></div>
         <div style="overflow-x:auto;">
         <table class="data-table">
-            <thead><tr><th>系统供应商编码</th><th>系统供应商名称</th><th>账单类型</th><th>业务期间</th><th>币种</th><th>总金额（计算）</th><th>已结算金额（计算）</th><th>未结算金额（计算）</th><th>不结算金额（计算）</th></tr></thead>
+            <thead><tr><th>供应商编码</th><th>供应商名称</th><th>账单类型</th><th>业务期间</th><th>币种</th><th>总金额（计算）</th><th>已结算金额（计算）</th><th>未结算金额（计算）</th><th>不结算金额（计算）</th></tr></thead>
             <tbody>
                 <tr><td>H30003</td><td>泰嘉物流</td><td>尾程派送</td><td>2026-06</td><td>CNY</td><td>39,000.00</td><td>24,250.00</td><td>8,660.00</td><td>6,090.00</td></tr>
-                <tr><td>H30005</td><td>Test公司H30005</td><td>尾程派送</td><td>2026-06</td><td>CNY</td><td>52,340.00</td><td>38,200.00</td><td>10,500.00</td><td>3,640.00</td></tr>
+                <tr><td>H30005</td><td>SHAOKE物流</td><td>尾程派送</td><td>2026-06</td><td>CNY</td><td>52,340.00</td><td>38,200.00</td><td>10,500.00</td><td>3,640.00</td></tr>
                 <tr><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td>2026-05</td><td>CNY</td><td>22,400.00</td><td>18,600.00</td><td>2,800.00</td><td>1,000.00</td></tr>
-                <tr><td>H30005</td><td>Test公司H30005</td><td>尾程派送</td><td>2026-05</td><td>CNY</td><td>48,150.00</td><td>42,800.00</td><td>3,200.00</td><td>2,150.00</td></tr>
-                <tr><td>H30005</td><td>Test公司H30005</td><td>国内转运</td><td>2026-06</td><td>CNY</td><td>15,600.00</td><td>12,000.00</td><td>2,100.00</td><td>1,500.00</td></tr>
+                <tr><td>H30005</td><td>SHAOKE物流</td><td>尾程派送</td><td>2026-05</td><td>CNY</td><td>48,150.00</td><td>42,800.00</td><td>3,200.00</td><td>2,150.00</td></tr>
+                <tr><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-06</td><td>CNY</td><td>15,600.00</td><td>12,000.00</td><td>2,100.00</td><td>1,500.00</td></tr>
                 <tr><td>H30001</td><td>DHL电子商务</td><td>香港空运</td><td>2026-06</td><td>USD</td><td>8,200.00</td><td>6,500.00</td><td>1,200.00</td><td>500.00</td></tr>
             </tbody>
         </table>
@@ -1867,6 +1774,19 @@ body { display: flex; flex-direction: column; }
             </div>
         </div>
         <div class="filter-field">
+            <label class="f-label">费用项</label>
+            <div class="multi-select">
+                <div class="multi-trigger">请选择</div>
+                <div class="multi-panel">
+                    <label><input type="checkbox" value="运费">运费</label>
+                    <label><input type="checkbox" value="清关费">清关费</label>
+                    <label><input type="checkbox" value="操作费">操作费</label>
+                    <label><input type="checkbox" value="燃油附加费">燃油附加费</label>
+                    <label><input type="checkbox" value="派送费">派送费</label>
+                </div>
+            </div>
+        </div>
+        <div class="filter-field">
             <label class="f-label">计提类型</label>
             <select class="f-select"><option value="">全部</option><option>确认</option><option>暂估</option></select>
         </div>
@@ -1883,26 +1803,29 @@ body { display: flex; flex-direction: column; }
         <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
             <div class="action-btns">
-                <button class="btn-query">查询</button>
-                <button class="btn-cancel">重置</button>
+                <button class="btn-query" onclick="alert('查询（演示）')">查询</button>
+                <button class="btn-cancel" onclick="resetFilter()">重置</button>
             </div>
         </div>
     </div>
 
-    <!-- 8列扁平主表：4.3对齐（1张表，不分块A/B/C，无红冲/无净增） -->
+    <!-- 页面级提示条 -->
+    <div id="accrualStatusBar" style="background:#ecf5ff;border:1px solid #d9ecff;border-radius:3px;padding:10px 16px;margin-bottom:10px;font-size:12px;color:#606266;line-height:1.8;">
+        <span style="color:#409eff;font-weight:600;">ℹ️ 计提状态说明：</span>
+        计提期间 <b style="color:#303133;">2026-05</b> · 状态：<span id="accrualStatusText" style="color:#e6a23c;font-weight:bold;">● 未确认</span>（数据来源：<span id="accrualDataSource">底表实时数据</span>）
+    </div>
+
+    <!-- 8列扁平主表 -->
     <div class="table-area">
         <div class="table-toolbar">
             <div class="toolbar-left">
-                <span style="font-size:12px;color:#909399;">共 <b style="color:#303133;">30</b> 条数据 · 财务可自行按「供应商/账单类型/业务期间/计提类型」任意维度加总入账</span>
+                <button id="btnConfirmAccrual" class="btn-confirm" style="background:#e74c3c;color:#fff;border:1px solid #e74c3c;padding:4px 12px;border-radius:3px;cursor:pointer;font-size:12px;" onclick="showAccrualConfirmModal()">确认计提</button>
             </div>
             <div class="toolbar-right">
-                <span class="export-tip-wrap">
-                    <button class="btn-export">导出Excel</button>
-                    <span class="export-tip">💡 供应商取值逻辑：<br>① 计提类型=<b>确认</b> → 取<b>实际供应商</b>编码/名称（账单确认时回写）<br>② 计提类型=<b>暂估</b> → 取<b>系统供应商</b>编码/名称（单据创建时计算）<br>⚠ 同一笔业务暂估和确认可能挂在不同的供应商名下</span>
-                </span>
+                <button class="btn-export" onclick="alert('导出Excel（演示）')">导出Excel</button>
             </div>
         </div>
-        <div style="overflow-x:auto;">
+        <div style="overflow:visible;">
         <table class="data-table">
             <thead><tr>
                 <th style="width:95px;">计提期间</th>
@@ -1910,50 +1833,38 @@ body { display: flex; flex-direction: column; }
                 <th style="width:150px;">供应商名称</th>
                 <th style="width:100px;">账单类型</th>
                 <th style="width:75px;">计提类型</th>
-                <th style="width:95px;">业务期间</th>
+                <th style="width:95px;">业务期间<span class="export-tip-wrap th-tip"><span style="display:inline-block;width:14px;height:14px;line-height:14px;text-align:center;border-radius:50%;background:#409eff;color:#fff;font-size:10px;font-style:normal;cursor:help;margin-left:3px;vertical-align:middle;">i</span><span class="export-tip">业务期间 = 单据时间所属月份（YYYY-MM）<br><br><b>单据时间取值规则：</b><br>• 非尾程类（国内转运/内地空运/香港空运/空运卡转/国外清关/国外转运）：运单发运时间，空则运单创建时间<br>• 尾程派送：订单出库时间，空则订单创建时间<br>• 孤儿账单：底表创建时间</span></span></th>
+                <th style="width:90px;">费用项</th>
                 <th style="width:65px;">币种</th>
                 <th style="width:110px;">原币金额</th>
             </tr></thead>
             <tbody>
                 <!-- ===== 国内转运：S001顺丰 + T003泰嘉 ===== -->
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>70.00</td></tr>
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td><span class="status-tag status-done">确认</span></td><td>2026-04</td><td>CNY</td><td>35.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>国内转运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>CNY</td><td>30.00</td></tr>
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-04</td><td>CNY</td><td>5.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>国内转运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>120.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>国内转运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>CNY</td><td>45.00</td></tr>
+                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>运费</td><td>CNY</td><td>70.00</td></tr>
+                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>国内转运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>运费</td><td>CNY</td><td>30.00</td></tr>
                 <!-- ===== 香港空运：D002 DHL电子商务 ===== -->
-                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>香港空运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>USD</td><td>1,200.00</td></tr>
-                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>香港空运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>USD</td><td>800.00</td></tr>
-                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>香港空运</td><td><span class="status-tag status-done">确认</span></td><td>2026-04</td><td>USD</td><td>560.00</td></tr>
+                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>香港空运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>运费</td><td>USD</td><td>1,200.00</td></tr>
                 <!-- ===== 内地空运：S001顺丰 ===== -->
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>内地空运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>2,500.00</td></tr>
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>内地空运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>CNY</td><td>1,200.00</td></tr>
+                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>内地空运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>运费</td><td>CNY</td><td>2,500.00</td></tr>
+                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>内地空运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>燃油附加费</td><td>CNY</td><td>1,200.00</td></tr>
                 <!-- ===== 空运卡转：S001顺丰 + T003泰嘉 ===== -->
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>空运卡转</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>3,800.00</td></tr>
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>空运卡转</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>CNY</td><td>1,500.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>空运卡转</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>1,100.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>空运卡转</td><td><span class="status-tag status-done">确认</span></td><td>2026-04</td><td>CNY</td><td>620.00</td></tr>
+                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>空运卡转</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>运费</td><td>CNY</td><td>3,800.00</td></tr>
                 <!-- ===== 国外清关：D002 DHL电子商务 ===== -->
-                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>USD</td><td>450.00</td></tr>
-                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>USD</td><td>210.00</td></tr>
-                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td><span class="status-tag status-done">确认</span></td><td>2026-04</td><td>USD</td><td>180.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>国外清关</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>680.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>国外清关</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>CNY</td><td>290.00</td></tr>
+                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>清关费</td><td>USD</td><td>450.00</td></tr>
                 <!-- ===== 国外转运：S001顺丰 + D002 DHL ===== -->
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>国外转运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>4,200.00</td></tr>
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>国外转运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>CNY</td><td>1,800.00</td></tr>
-                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>国外转运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>USD</td><td>900.00</td></tr>
-                <tr><td>2026-05</td><td>H30001</td><td>DHL电子商务</td><td>国外转运</td><td><span class="status-tag status-review">暂估</span></td><td>2026-04</td><td>USD</td><td>340.00</td></tr>
+                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>国外转运</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>运费</td><td>CNY</td><td>4,200.00</td></tr>
                 <!-- ===== 尾程派送：T003泰嘉 + S001顺丰 ===== -->
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>尾程派送</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>6,500.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>尾程派送</td><td><span class="status-tag status-done">确认</span></td><td>2026-04</td><td>CNY</td><td>2,300.00</td></tr>
-                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>尾程派送</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>CNY</td><td>2,100.00</td></tr>
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>尾程派送</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>CNY</td><td>3,600.00</td></tr>
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>尾程派送</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>CNY</td><td>1,050.00</td></tr>
-                <tr><td>2026-05</td><td>H30005</td><td>SHAOKE物流</td><td>尾程派送</td><td><span class="status-tag status-review">暂估</span></td><td>2026-04</td><td>CNY</td><td>480.00</td></tr>
+                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>尾程派送</td><td><span class="status-tag status-done">确认</span></td><td>2026-05</td><td>运费</td><td>CNY</td><td>6,500.00</td></tr>
+                <tr><td>2026-05</td><td>H30003</td><td>泰嘉物流</td><td>尾程派送</td><td><span class="status-tag status-review">暂估</span></td><td>2026-05</td><td>派送费</td><td>CNY</td><td>2,100.00</td></tr>
             </tbody>
         </table>
+        </div>
+        <div class="table-footer">
+            <div></div>
+            <div class="footer-right">
+                <span>共 1 页 10 条数据</span><span>|</span><span>每页显示：</span><select class="footer-select"><option selected>10</option><option>20</option><option>50</option></select>
+                <span class="pg-btn">&lt;</span><span class="pg-btn active">1</span><span class="pg-btn">&gt;</span>
+            </div>
         </div>
     </div>
 </div>
@@ -1983,9 +1894,9 @@ body { display: flex; flex-direction: column; }
         <h4 id="clearModalTitle">清账确认</h4>
         <!-- 分组情况 -->
         <div style="background:#f5f7fa;border-radius:3px;padding:10px 12px;margin-bottom:12px;">
-            <div style="font-size:12px;color:#606266;margin-bottom:6px;font-weight:600;">📊 分组情况（按「系统供应商 + 币种」拆分）</div>
+            <div style="font-size:12px;color:#606266;margin-bottom:6px;font-weight:600;">📊 分组情况（按「供应商 + 币种 + 账单类型」分组生成对账单）</div>
             <div id="clearGroupInfo" style="font-size:12px;color:#303133;">
-                共 <b>4</b> 个唯一组合 → 将生成 <b>4</b> 张清账账单
+                共 <b>5</b> 个唯一组合 → 将生成 <b>5</b> 张对账单
             </div>
         </div>
         <!-- 金额汇总 -->
@@ -2000,8 +1911,8 @@ body { display: flex; flex-direction: column; }
                     </tr>
                 </thead>
                 <tbody id="clearAmountTable">
-                    <tr><td style="padding:6px 8px;border-bottom:1px solid #ebeef5;">CNY</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid #ebeef5;">5 条</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid #ebeef5;">3,900.00</td></tr>
-                    <tr><td style="padding:6px 8px;border-bottom:1px solid #ebeef5;">USD</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid #ebeef5;">2 条</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid #ebeef5;">1,190.00</td></tr>
+                    <tr><td style="padding:6px 8px;border-bottom:1px solid #ebeef5;">CNY</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid #ebeef5;">6 条</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid #ebeef5;">5,190.00</td></tr>
+                    <tr><td style="padding:6px 8px;border-bottom:1px solid #ebeef5;">USD</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid #ebeef5;">1 条</td><td style="padding:6px 8px;text-align:right;border-bottom:1px solid #ebeef5;">300.00</td></tr>
                 </tbody>
             </table>
         </div>
@@ -2030,6 +1941,24 @@ body { display: flex; flex-direction: column; }
     </div>
 </div>
 
+<!-- 确认计提二次确认弹窗 -->
+<div class="modal-overlay" id="accrualConfirmModal">
+    <div class="modal-box" style="width:480px;">
+        <h4 style="color:#e74c3c;">⚠️ 确认计提</h4>
+        <div style="background:#fdf6ec;border:1px solid #faecd8;border-radius:3px;padding:12px 14px;margin:12px 0;font-size:13px;color:#606266;line-height:1.8;">
+            <div style="font-weight:600;color:#303133;margin-bottom:6px;">确认后将固化当期计提数据，操作不可逆！</div>
+            <div>• 已确认期间不可撤销、不可重新确认</div>
+            <div>• 如需调整金额，请在金蝶系统通过冲销处理</div>
+            <div>• 请仔细核对数据后谨慎操作</div>
+        </div>
+        <div style="font-size:12px;color:#909399;margin-bottom:8px;">计提期间：<b style="color:#303133;">2026-05</b> · 数据条数：<b style="color:#303133;">10 条</b></div>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="hideAccrualConfirmModal()">取消</button>
+            <button class="btn-confirm" onclick="confirmAccrual()">确认计提</button>
+        </div>
+    </div>
+</div>
+
 <!-- 导入对账单弹窗 -->
 <div class="modal-overlay" id="importModal">
     <div class="modal-box">
@@ -2038,9 +1967,9 @@ body { display: flex; flex-direction: column; }
             <div class="filter-item"><span class="f-label">供应商</span>
                 <select class="f-select" id="importSupplier" style="width:200px;">
                     <option value="">请选择</option>
-                    <option>SHAOKE</option>
-                    <option>DHL_ECOMMERCE</option>
-                    <option>TAIJIA</option>
+                    <option value="H30005">H30005 SHAOKE物流</option>
+                    <option value="H30001">H30001 DHL电子商务</option>
+                    <option value="H30003">H30003 泰嘉物流</option>
                 </select>
             </div>
         </div>
@@ -2064,17 +1993,7 @@ document.querySelectorAll('.sb-menu li').forEach(function(li) {
     li.addEventListener('click', function() {
         var viewId = this.getAttribute('data-view');
         if (!viewId) return;
-        // 切换菜单高亮 - 所有菜单项
-        document.querySelectorAll('.sb-menu li').forEach(function(item) {
-            item.classList.remove('active');
-        });
-        this.classList.add('active');
-        // 切换视图
-        document.querySelectorAll('.page-view').forEach(function(v) {
-            v.classList.remove('active');
-        });
-        var target = document.getElementById('view-' + viewId);
-        if (target) target.classList.add('active');
+        switchView(viewId, this);
     });
 });
 
@@ -2112,9 +2031,11 @@ document.addEventListener('click', function() {
     document.querySelectorAll('.multi-panel.show').forEach(function(p) { p.classList.remove('show'); });
 });
 
-// 筛选栏 - 重置
+// 筛选栏 - 重置（通用：重置当前可见视图的筛选栏）
 function resetFilter() {
-    var box = document.querySelector('#view-recList .filter-grid');
+    var activeView = document.querySelector('.page-view.active');
+    if (!activeView) return;
+    var box = activeView.querySelector('.filter-grid');
     if (!box) return;
     box.querySelectorAll('input[type=text]').forEach(function(i) { i.value = ''; });
     box.querySelectorAll('textarea').forEach(function(t) { t.value = ''; });
@@ -2176,19 +2097,24 @@ function regenRecs() {
 
 
 // 通用：隐藏所有视图并显示指定视图（viewId 省略 'view-' 前缀）
-function switchView(viewId) {
+function switchView(viewId, menuEl) {
+    // 切换菜单高亮
+    document.querySelectorAll('.sb-menu li').forEach(function(item) {
+        item.classList.remove('active');
+    });
+    if (menuEl) {
+        menuEl.classList.add('active');
+    } else {
+        // 通过data-view反查菜单项（用于switchView('xxx')直接调用场景）
+        var matched = document.querySelector('.sb-menu li[data-view="' + viewId + '"]');
+        if (matched) matched.classList.add('active');
+    }
+    // 切换视图
     document.querySelectorAll('.page-view').forEach(function(v) {
         v.classList.remove('active');
     });
     var target = document.getElementById('view-' + viewId);
     if (target) target.classList.add('active');
-}
-
-// 清除侧边栏菜单高亮
-function clearMenuActive() {
-    document.querySelectorAll('.sb-menu li').forEach(function(item) {
-        item.classList.remove('active');
-    });
 }
 
 
@@ -2241,11 +2167,10 @@ function confirmClear() {
     // 模拟清账成功
     var count = clearMode === 'selected' ? document.querySelectorAll('.clear-check:checked').length : 7;
     hideClearModal();
-    alert('✅ 清账已完成！\n本次共处理 4 张清账账单，涉及 ' + count + ' 条记录。\n（会计期间：' + fiscalPeriod + '，账单时间范围：' + dateStart + ' ~ ' + dateEnd + '）');
+    alert('✅ 清账已完成！\n本次共处理 5 张清账账单，涉及 ' + count + ' 条记录。\n（会计期间：' + fiscalPeriod + '，账单时间范围：' + dateStart + ' ~ ' + dateEnd + '）');
 }
 function resetClearFilter() {
-    // 重置清账单筛选条件（演示）
-    alert('已重置筛选条件（演示）');
+    resetFilter();
 }
 
 // 关闭弹窗（点击遮罩）
@@ -2969,27 +2894,41 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
-    // 多选下拉的交互
-    document.querySelectorAll('.multi-trigger').forEach(function(trigger) {
-        trigger.addEventListener('click', function(e) {
-            e.stopPropagation();
-            var panel = this.nextElementSibling;
-            // 关闭其他面板
-            document.querySelectorAll('.multi-panel.show').forEach(function(p) {
-                if (p !== panel) p.classList.remove('show');
-            });
-            panel.classList.toggle('show');
-        });
-    });
-    
-    // 点击其他地方关闭多选面板
-    document.addEventListener('click', function() {
-        document.querySelectorAll('.multi-panel.show').forEach(function(p) {
-            p.classList.remove('show');
-        });
-    });
+    // 注：多选下拉的交互已在 <script> 顶部的 .multi-select 绑定中统一处理（含点击展开、checkbox联动、点击外部关闭），
+    // 此处不再重复绑定，避免双重 toggle 导致面板无法展开。
 });
+
+// 确认计提二次确认弹窗
+function showAccrualConfirmModal() {
+    document.getElementById('accrualConfirmModal').classList.add('show');
+}
+function hideAccrualConfirmModal() {
+    document.getElementById('accrualConfirmModal').classList.remove('show');
+}
+function confirmAccrual() {
+    hideAccrualConfirmModal();
+    // 模拟确认计提成功
+    var statusText = document.getElementById('accrualStatusText');
+    var dataSource = document.getElementById('accrualDataSource');
+    var btnConfirm = document.getElementById('btnConfirmAccrual');
+    
+    if (statusText) {
+        statusText.textContent = '● 已确认';
+        statusText.style.color = '#67c23a';
+    }
+    if (dataSource) {
+        dataSource.textContent = '计提确认表（固化数据）';
+    }
+    if (btnConfirm) {
+        btnConfirm.disabled = true;
+        btnConfirm.style.opacity = '0.5';
+        btnConfirm.style.cursor = 'not-allowed';
+        btnConfirm.style.background = '#909399';
+        btnConfirm.style.borderColor = '#909399';
+        btnConfirm.title = '已确认期间不可撤销、不可重新确认';
+    }
+    alert('✅ 计提确认成功！\n期间 2026-05 的数据已固化，后续查询将读取固化数据。');
+}
 </script>
 
 </body>
