@@ -43,7 +43,14 @@ const phaseNavs = [
     level: 1,
     children: [
       { id: "03-report/应付账单统计表", label: "应付账单统计表", level: 2 },
-      { id: "03-report/滚动计提表", label: "滚动计提表", level: 2 },
+    ],
+  },
+  {
+    id: "04-provision",
+    label: "04-计提",
+    level: 1,
+    children: [
+      { id: "04-provision/滚动计提表", label: "滚动计提表", level: 2 },
     ],
   },
 ];
@@ -62,5 +69,5 @@ const filePathMap = {
   "01-statement/5.对账结果汇总": "01-对账单/5.对账结果汇总.md",
   "02-clearing-bill/清账单列表": "02-清账单/清账单列表.md",
   "03-report/应付账单统计表": "03-报表/应付账单统计表.md",
-  "03-report/滚动计提表": "03-报表/滚动计提表.md",
+  "04-provision/滚动计提表": "04-计提/滚动计提表.md",
 };
