@@ -863,6 +863,7 @@ body { display: flex; flex-direction: column; }
 .diff-tag-ok { background: #f0f9eb; color: #67c23a; }
 .diff-tag-none { background: #f5f5f5; color: #999; }
 .diff-tag-currency { background: #fdf6ec; color: #e6a23c; }
+.diff-tag-supplier { background: #f3e8ff; color: #9b59b6; }
 /* 作废标记 */
 .void-yes { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #fde2e2; color: #e74c3c; }
 .void-no { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 12px; background: #f0f9eb; color: #67c23a; }
@@ -1270,7 +1271,7 @@ body { display: flex; flex-direction: column; }
         </div>
         <div class="filter-field">
             <label class="f-label">差异类型</label>
-            <select class="f-select"><option value="">全部</option><option>金额差异</option><option>无差异</option><option>重量偏差（wb＞cp）</option><option>重量偏差（wb＜cp）</option><option>历史已对账</option><option>单据无计费</option><option>费用项无计费</option><option>成本系统无单据</option><option>对账币种不一致</option></select>
+            <select class="f-select"><option value="">全部</option><option>金额差异</option><option>无差异</option><option>重量偏差（wb＞cp）</option><option>重量偏差（wb＜cp）</option><option>历史已对账</option><option>单据无计费</option><option>费用项无计费</option><option>供应商不一致</option><option>成本系统无单据</option><option>对账币种不一致</option></select>
         </div>
         <div class="filter-field">
             <label class="f-label">作废标记</label>
@@ -1278,7 +1279,7 @@ body { display: flex; flex-direction: column; }
         </div>
         <div class="filter-field">
             <label class="f-label">明细状态</label>
-            <select class="f-select"><option value="">全部</option><option>系统对比中</option><option>待处理</option><option>已处理</option><option>已变更待复核</option></select>
+            <select class="f-select"><option value="">全部</option><option>系统对比中</option><option>待处理</option><option>已处理</option><option>已变更待复核</option><option>已完成</option></select>
         </div>
         <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
@@ -1363,11 +1364,14 @@ body { display: flex; flex-direction: column; }
                 <tr>
                     <td><input type="checkbox"></td><td>BZD20251201012</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238300000YQ001</td><td>报关费</td><td>LastMileCustomsFee</td><td>CNY</td><td>90</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-currency">对账币种不一致</span></td><td>-</td><td>-</td><td>-</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-comparing">系统对比中</span></td>
                 </tr>
+                <tr>
+                    <td><input type="checkbox"></td><td>BZD20251201013</td><td><span class="type-tag">尾程派送</span></td><td>WNBAA04238300001YQ001</td><td>报关费</td><td>LastMileCustomsFee</td><td>CNY</td><td>15</td><td>-</td><td>-</td><td><span class="diff-tag diff-tag-supplier">供应商不一致</span></td><td>-</td><td>-</td><td>-</td><td>RC20260608001</td><td><span class="void-no">正常</span></td><td><span class="ms-comparing">系统对比中</span></td>
+                </tr>
             </tbody>
         </table>
         </div>
         <div class="table-footer" style="justify-content:flex-end;gap:12px;padding:12px 0 24px 0;">
-            <span>共 12 条记录</span>
+            <span>共 13 条记录</span>
             <span><select style="width:80px;height:28px;border:1px solid #dcdfe6;border-radius:3px;font-size:12px;"><option>10</option><option>20</option><option>50</option></select> 条/页</span>
             <button class="pg-btn" disabled><</button>
             <span style="margin:0 6px;">1/1</span>
@@ -1434,11 +1438,15 @@ body { display: flex; flex-direction: column; }
         </div>
         <div class="filter-field">
             <label class="f-label">差异类型</label>
-            <select class="f-select"><option value="">全部</option><option>金额差异</option><option>无差异</option><option>重量偏差（wb＞cp）</option><option>重量偏差（wb＜cp）</option><option>费用项无计费</option><option>历史已对账</option><option>单据无计费</option><option>成本系统无单据</option><option>对账币种不一致</option></select>
+            <select class="f-select"><option value="">全部</option><option>金额差异</option><option>无差异</option><option>重量偏差（wb＞cp）</option><option>重量偏差（wb＜cp）</option><option>费用项无计费</option><option>供应商不一致</option><option>历史已对账</option><option>单据无计费</option><option>成本系统无单据</option><option>对账币种不一致</option></select>
         </div>
         <div class="filter-field">
             <label class="f-label">结算策略</label>
             <select class="f-select"><option value="">全部</option><option>空</option><option>按账单金额支付+争议</option><option>按账单金额支付+不争议</option><option>按系统金额支付+争议</option><option>按系统金额支付+不争议</option><option>不支付+争议</option><option>不支付+不争议</option><option>清账</option></select>
+        </div>
+        <div class="filter-field">
+            <label class="f-label">作废标记</label>
+            <select class="f-select"><option value="">全部</option><option>正常</option><option>作废</option></select>
         </div>
         <div class="filter-field">
             <label class="f-label">供应商</label>
@@ -1458,25 +1466,26 @@ body { display: flex; flex-direction: column; }
         <table class="data-table">
             <thead><tr>
                 <th>底表明细ID</th><th>对账单ID</th><th>对账单明细ID</th><th>系统ID</th><th>费用项</th><th>币种</th>
-                <th>账单金额</th><th>最新计算金额</th><th>快照计算金额</th><th>差异类型</th><th>结算策略</th><th>付款金额</th>
+                <th>账单金额</th><th>最新计算金额</th><th>快照计算金额</th><th>明细状态</th><th>差异类型</th><th>结算策略</th><th>付款金额</th>
                 <th>创建时间</th><th>完成对账时间</th><th>供应商编码</th><th>供应商名称</th>
-                <th>账单类型</th><th>单据时间</th><th>费用项编码</th><th>锁定状态</th>
+                <th>账单类型</th><th>单据时间</th><th>费用项编码</th><th>作废标记</th><th>锁定状态</th>
             </tr></thead>
             <tbody>
-                <tr><td>R001</td><td>RC20260608001</td><td>BZ001</td><td>YD001</td><td>燃油费</td><td>CNY</td><td>520</td><td>550</td><td>500</td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+争议</td><td>520</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td><span class="locked-tag locked-yes">已锁定</span></td></tr>
-                <tr><td>R003</td><td>RC20260608001</td><td>BZ002</td><td>YD001</td><td>燃油费</td><td>USD</td><td>72</td><td>75</td><td>75</td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+不争议</td><td>72</td><td>2026-06-01 10:00</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
-                <tr><td>R004</td><td>-</td><td>-</td><td>YD001</td><td>装卸费</td><td>CNY</td><td>-</td><td>120</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>ZXF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R005</td><td>-</td><td>-</td><td>YD001</td><td>清关费</td><td>CNY</td><td>-</td><td>430</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td>2026-05-21</td><td>QGF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R006</td><td>RC20260608001</td><td>BZ004</td><td>YD001</td><td>仓储费</td><td>CNY</td><td>80</td><td>-</td><td>-</td><td><span class="status-tag status-reject">费用项无计费</span></td><td>不支付+不争议</td><td>0</td><td>2026-06-06 09:15</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>CCF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
-                <tr><td>R007</td><td>-</td><td>-</td><td>YD002</td><td>基础运费</td><td>CNY</td><td>-</td><td>350</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-02 08:00</td><td>-</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>JCYF</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R008</td><td>RC20260608002</td><td>BZ005</td><td>YD002</td><td>燃油附加费</td><td>CNY</td><td>90</td><td>85</td><td>85</td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>90</td><td>2026-06-02 08:00</td><td>2026-06-08 14:30:25</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>RYFJF</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
+                <tr><td>R001</td><td>RC20260608001</td><td>BZ001</td><td>YD001</td><td>燃油费</td><td>CNY</td><td>520</td><td>550</td><td>500</td><td><span class="status-tag status-review">已处理</span></td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+争议</td><td>520</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td>正常</td><td><span class="locked-tag locked-yes">已锁定</span></td></tr>
+                <tr><td>R003</td><td>RC20260608001</td><td>BZ002</td><td>YD001</td><td>燃油费</td><td>USD</td><td>72</td><td>75</td><td>75</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+不争议</td><td>72</td><td>2026-06-01 10:00</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td>正常</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
+                <tr><td>R004</td><td>-</td><td>-</td><td>YD001</td><td>装卸费</td><td>CNY</td><td>-</td><td>120</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>ZXF</td><td>正常</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
+                <tr><td>R005</td><td>-</td><td>-</td><td>YD001</td><td>清关费</td><td>CNY</td><td>-</td><td>430</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td>2026-05-21</td><td>QGF</td><td>正常</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
+                <tr><td>R006</td><td>RC20260608001</td><td>BZ004</td><td>YD001</td><td>仓储费</td><td>CNY</td><td>80</td><td>-</td><td>-</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-reject">费用项无计费</span></td><td>不支付+不争议</td><td>0</td><td>2026-06-06 09:15</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>CCF</td><td>正常</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
+                <tr><td>R007</td><td>-</td><td>-</td><td>YD002</td><td>基础运费</td><td>CNY</td><td>-</td><td>350</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-02 08:00</td><td>-</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>JCYF</td><td>正常</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
+                <tr><td>R008</td><td>RC20260608002</td><td>BZ005</td><td>YD002</td><td>燃油附加费</td><td>CNY</td><td>90</td><td>85</td><td>85</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>90</td><td>2026-06-02 08:00</td><td>2026-06-08 14:30:25</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>RYFJF</td><td>正常</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
+                <tr><td>R009</td><td>RC20260608001</td><td>BZ010</td><td>YD001</td><td>派送费</td><td>CNY</td><td>60</td><td>60</td><td>60</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>60</td><td>2026-06-06 09:20</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>PSF</td><td>作废</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
             </tbody>
         </table>
         </div>
         <div class="table-footer">
             <div></div>
             <div class="footer-right">
-                <span>共 1 页 7 条数据</span><span>|</span><span>每页显示：</span><select class="footer-select"><option selected>20</option><option>50</option></select>
+                <span>共 1 页 8 条数据</span><span>|</span><span>每页显示：</span><select class="footer-select"><option selected>20</option><option>50</option></select>
                 <span class="pg-btn">&lt;</span><span class="pg-btn active">1</span><span class="pg-btn">&gt;</span>
             </div>
         </div>
@@ -1495,26 +1504,28 @@ body { display: flex; flex-direction: column; }
         <table class="data-table">
             <thead><tr><th>结算策略</th><th>差异类型</th><th>费用项名称</th><th>币种</th><th>账单金额</th><th>快照计算金额</th><th>计算差异</th><th>账单金额占比</th></tr></thead>
             <tbody>
-                <tr><td>按账单金额支付+不争议</td><td>无差异</td><td>运费</td><td>CNY</td><td>100</td><td>100</td><td>0</td><td>21.74%</td></tr>
-                <tr><td>按账单金额支付+不争议</td><td>无差异</td><td>超尺附加费</td><td>CNY</td><td>20</td><td>20</td><td>0</td><td>4.35%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>无差异小计</strong></td><td>-</td><td>CNY</td><td><strong>120</strong></td><td><strong>120</strong></td><td><strong>0</strong></td><td><strong>26.09%</strong></td></tr>
-                <tr><td>按账单金额支付+不争议</td><td>金额差异</td><td>运费</td><td>CNY</td><td>80</td><td>75</td><td>5</td><td>17.39%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>金额差异小计</strong></td><td>-</td><td>CNY</td><td><strong>80</strong></td><td><strong>75</strong></td><td><strong>5</strong></td><td><strong>17.39%</strong></td></tr>
-                <tr><td>按系统金额支付+不争议</td><td>重量偏差（wb＞cp）</td><td>尾程运费</td><td>CNY</td><td>60</td><td>50</td><td>10</td><td>13.04%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>重量偏差（wb＞cp）小计</strong></td><td>-</td><td>CNY</td><td><strong>60</strong></td><td><strong>50</strong></td><td><strong>10</strong></td><td><strong>13.04%</strong></td></tr>
-                <tr><td>按系统金额支付+不争议</td><td>重量偏差（wb＜cp）</td><td>尾程运费</td><td>CNY</td><td>40</td><td>50</td><td>-10</td><td>8.70%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>重量偏差（wb＜cp）小计</strong></td><td>-</td><td>CNY</td><td><strong>40</strong></td><td><strong>50</strong></td><td><strong>-10</strong></td><td><strong>8.70%</strong></td></tr>
-                <tr><td>不支付+不争议</td><td>历史已对账</td><td>运费</td><td>CNY</td><td>30</td><td>0（置换）</td><td>30</td><td>6.52%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>历史已对账小计</strong></td><td>-</td><td>CNY</td><td><strong>30</strong></td><td><strong>0</strong></td><td><strong>30</strong></td><td><strong>6.52%</strong></td></tr>
-                <tr><td>不支付+不争议</td><td>成本系统无单据</td><td>运费</td><td>CNY</td><td>50</td><td>0（置换）</td><td>50</td><td>10.87%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>成本系统无单据小计</strong></td><td>-</td><td>CNY</td><td><strong>50</strong></td><td><strong>0</strong></td><td><strong>50</strong></td><td><strong>10.87%</strong></td></tr>
-                <tr><td>不支付+不争议</td><td>单据无计费</td><td>运费</td><td>CNY</td><td>20</td><td>0（置换）</td><td>20</td><td>4.35%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>单据无计费小计</strong></td><td>-</td><td>CNY</td><td><strong>20</strong></td><td><strong>0</strong></td><td><strong>20</strong></td><td><strong>4.35%</strong></td></tr>
-                <tr><td>不支付+不争议</td><td>费用项无计费</td><td>运费</td><td>CNY</td><td>10</td><td>0（置换）</td><td>10</td><td>2.17%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>费用项无计费小计</strong></td><td>-</td><td>CNY</td><td><strong>10</strong></td><td><strong>0</strong></td><td><strong>10</strong></td><td><strong>2.17%</strong></td></tr>
-                <tr><td>按账单金额支付+不争议</td><td>对账币种不一致</td><td>运费</td><td>CNY</td><td>50</td><td>0（置换）</td><td>50</td><td>10.87%</td></tr>
-                <tr class="subtotal-row"><td>-</td><td><strong>对账币种不一致小计</strong></td><td>-</td><td>CNY</td><td><strong>50</strong></td><td><strong>0</strong></td><td><strong>50</strong></td><td><strong>10.87%</strong></td></tr>
-                <tr class="total-row"><td>-</td><td><strong>总计</strong></td><td>-</td><td>CNY</td><td><strong>460</strong></td><td><strong>295</strong></td><td><strong>165</strong></td><td><strong>100%</strong></td></tr>
+                <tr><td>按账单金额支付+不争议</td><td>无差异</td><td>运费</td><td>CNY</td><td>100</td><td>100</td><td>0</td><td>21.05%</td></tr>
+                <tr><td>按账单金额支付+不争议</td><td>无差异</td><td>超尺附加费</td><td>CNY</td><td>20</td><td>20</td><td>0</td><td>4.21%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>无差异小计</strong></td><td>-</td><td>CNY</td><td><strong>120</strong></td><td><strong>120</strong></td><td><strong>0</strong></td><td><strong>25.26%</strong></td></tr>
+                <tr><td>按账单金额支付+不争议</td><td>金额差异</td><td>运费</td><td>CNY</td><td>80</td><td>75</td><td>5</td><td>16.84%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>金额差异小计</strong></td><td>-</td><td>CNY</td><td><strong>80</strong></td><td><strong>75</strong></td><td><strong>5</strong></td><td><strong>16.84%</strong></td></tr>
+                <tr><td>按系统金额支付+不争议</td><td>重量偏差（wb＞cp）</td><td>尾程运费</td><td>CNY</td><td>60</td><td>50</td><td>10</td><td>12.63%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>重量偏差（wb＞cp）小计</strong></td><td>-</td><td>CNY</td><td><strong>60</strong></td><td><strong>50</strong></td><td><strong>10</strong></td><td><strong>12.63%</strong></td></tr>
+                <tr><td>按系统金额支付+不争议</td><td>重量偏差（wb＜cp）</td><td>尾程运费</td><td>CNY</td><td>40</td><td>50</td><td>-10</td><td>8.42%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>重量偏差（wb＜cp）小计</strong></td><td>-</td><td>CNY</td><td><strong>40</strong></td><td><strong>50</strong></td><td><strong>-10</strong></td><td><strong>8.42%</strong></td></tr>
+                <tr><td>不支付+不争议</td><td>历史已对账</td><td>运费</td><td>CNY</td><td>30</td><td>0（置换）</td><td>30</td><td>6.32%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>历史已对账小计</strong></td><td>-</td><td>CNY</td><td><strong>30</strong></td><td><strong>0</strong></td><td><strong>30</strong></td><td><strong>6.32%</strong></td></tr>
+                <tr><td>不支付+不争议</td><td>成本系统无单据</td><td>运费</td><td>CNY</td><td>50</td><td>0（置换）</td><td>50</td><td>10.53%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>成本系统无单据小计</strong></td><td>-</td><td>CNY</td><td><strong>50</strong></td><td><strong>0</strong></td><td><strong>50</strong></td><td><strong>10.53%</strong></td></tr>
+                <tr><td>不支付+不争议</td><td>单据无计费</td><td>运费</td><td>CNY</td><td>20</td><td>0（置换）</td><td>20</td><td>4.21%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>单据无计费小计</strong></td><td>-</td><td>CNY</td><td><strong>20</strong></td><td><strong>0</strong></td><td><strong>20</strong></td><td><strong>4.21%</strong></td></tr>
+                <tr><td>不支付+不争议</td><td>费用项无计费</td><td>运费</td><td>CNY</td><td>10</td><td>0（置换）</td><td>10</td><td>2.11%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>费用项无计费小计</strong></td><td>-</td><td>CNY</td><td><strong>10</strong></td><td><strong>0</strong></td><td><strong>10</strong></td><td><strong>2.11%</strong></td></tr>
+                <tr><td>不支付+不争议</td><td>供应商不一致</td><td>运费</td><td>CNY</td><td>15</td><td>0（置换）</td><td>15</td><td>3.16%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>供应商不一致小计</strong></td><td>-</td><td>CNY</td><td><strong>15</strong></td><td><strong>0</strong></td><td><strong>15</strong></td><td><strong>3.16%</strong></td></tr>
+                <tr><td>按账单金额支付+不争议</td><td>对账币种不一致</td><td>运费</td><td>CNY</td><td>50</td><td>0（置换）</td><td>50</td><td>10.53%</td></tr>
+                <tr class="subtotal-row"><td>-</td><td><strong>对账币种不一致小计</strong></td><td>-</td><td>CNY</td><td><strong>50</strong></td><td><strong>0</strong></td><td><strong>50</strong></td><td><strong>10.53%</strong></td></tr>
+                <tr class="total-row"><td>-</td><td><strong>总计</strong></td><td>-</td><td>CNY</td><td><strong>475</strong></td><td><strong>295</strong></td><td><strong>180</strong></td><td><strong>100%</strong></td></tr>
             </tbody>
         </table>
         </div>
@@ -1606,15 +1617,16 @@ body { display: flex; flex-direction: column; }
     <!-- 页面级提示条 -->
     <div style="background:#ecf5ff;border:1px solid #d9ecff;border-radius:3px;padding:10px 16px;margin-bottom:10px;font-size:12px;color:#606266;line-height:1.8;">
         <span style="color:#409eff;font-weight:600;">ℹ️ 清账资格说明：</span>
-        本页面仅展示<b style="color:#303133;">满足清账资格</b>的记录，须同时符合3个条件：
-        ① <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">对账单ID</code> 为空；
-        ② <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">最新计算金额</code> 非空（含值为0）；
-        ③ 单据时间距今 ≥ <b>180天</b>。
+        本页面仅展示<b style="color:#303133;">满足清账资格</b>的记录，须同时符合4个条件：
+        ① <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">作废标记</code> = 正常；
+        ② <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">明细状态</code> 为空（未被任何对账单处理/占用）；
+        ③ <code style="background:#f5f7fa;padding:0 4px;border-radius:2px;">最新计算金额</code> 非空（含值为0）；
+        ④ 单据时间距今 ≥ <b>180天</b>。
     </div>
     <div class="table-area">
         <div class="table-toolbar">
             <div class="toolbar-left">
-                <button class="btn-del" onclick="showClearModal('selected')">清账（勾选版）</button>
+                <button class="btn-del" onclick="showClearModal('selected')">清账</button>
                 <button class="btn-query" onclick="showClearModal('all')">根据查询条件清账</button>
                 <span style="font-size:11px;color:#909399;margin-left:8px;">⚠ 清账为不可逆操作，提交后自动完成全流程对账</span>
             </div>
@@ -2140,11 +2152,11 @@ function showClearModal(mode) {
             return;
         }
         modalTitle.textContent = '清账确认（勾选版）';
-        warnMsg.innerHTML = '⚠ 确认对勾选的 <b>' + count + ' 条记录</b> 执行清账？清账将自动完成全流程对账，生成清账账单并锁定底表记录，此操作<b>不可逆</b>，请谨慎操作！';
+        warnMsg.innerHTML = '⚠ 确认对勾选的 <b>' + count + ' 条记录</b> 执行清账？清账将自动完成全流程对账，生成清账账单并占用底表记录（明细状态=系统对比中→已完成），此操作<b>不可逆</b>，请谨慎操作！';
     } else {
         // 全量版：假设当前查询结果有7条
         modalTitle.textContent = '清账确认（全量版）';
-        warnMsg.innerHTML = '⚠ 确认对当前查询结果的 <b>7 条记录</b> 全部执行清账？清账将自动完成全流程对账，生成清账账单并锁定底表记录，此操作<b>不可逆</b>，请谨慎操作！';
+        warnMsg.innerHTML = '⚠ 确认对当前查询结果的 <b>7 条记录</b> 全部执行清账？清账将自动完成全流程对账，生成清账账单并占用底表记录（明细状态=系统对比中→已完成），此操作<b>不可逆</b>，请谨慎操作！';
     }
     document.getElementById('clearModal').classList.add('show');
 }
@@ -2168,7 +2180,7 @@ function confirmClear() {
     // 模拟清账成功
     var count = clearMode === 'selected' ? document.querySelectorAll('.clear-check:checked').length : 7;
     hideClearModal();
-    alert('✅ 清账已完成！\n本次共处理 5 张清账账单，涉及 ' + count + ' 条记录。\n（会计期间：' + fiscalPeriod + '，账单时间范围：' + dateStart + ' ~ ' + dateEnd + '）');
+    alert('✅ 清账已完成！\n本次共处理 5 张清账账单，涉及 ' + count + ' 条记录。');
 }
 function resetClearFilter() {
     resetFilter();
@@ -2383,7 +2395,8 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
             ['BZD20251201009','尾程派送','-','操作费','CNY',50,'-','-','成本系统无单据','-','-','-','RC20260608001','LastMileHandlingFee','正常','系统对比中','-','-','-','-','-','-','-','-','-','-','-','揽收','',''],
             ['BZD20251201010','尾程派送','WNBAA04238299898YQ001','过路费','CNY',30,'-','-','费用项无计费','-','-','-','RC20260608001','LastMileTollFee','正常','系统对比中','CH002','YQ002','CUS10010','45kg','-','45kg','-','否','-','Z2华南','-','在途','2025-12-03 10:00',''],
             ['BZD20251201011','尾程派送','WNBAA04238299899YQ001','基础运费','CNY',200,205,-5,'金额差异','-','-','计费重 账单:120kg 计算:118kg 差异:1.69%','RC20260608001','LastMileBasicFreight','正常','已变更待复核','CH005','YQ005','CUS10011','120kg','119kg','120kg','118kg','否','否','Z7西北','Z7西北','在途','2025-12-02 20:00',''],
-            ['BZD20251201012','尾程派送','WNBAA04238300000YQ001','报关费','CNY',90,'-','-','对账币种不一致','-','-','-','RC20260608001','LastMileCustomsFee','正常','系统对比中','CH003','YQ003','CUS10012','15kg','-','15kg','-','否','-','Z1深圳','-','异常','2025-12-03 09:40','']
+            ['BZD20251201012','尾程派送','WNBAA04238300000YQ001','报关费','CNY',90,'-','-','对账币种不一致','-','-','-','RC20260608001','LastMileCustomsFee','正常','系统对比中','CH003','YQ003','CUS10012','15kg','-','15kg','-','否','-','Z1深圳','-','异常','2025-12-03 09:40',''],
+            ['BZD20251201013','尾程派送','WNBAA04238300001YQ001','报关费','CNY',15,'-','-','供应商不一致','-','-','-','RC20260608001','LastMileCustomsFee','正常','系统对比中','CH003','YQ003','CUS10013','15kg','-','15kg','-','否','-','Z1深圳','-','异常','2025-12-03 11:20','']
         ];
         function esc(v) {
             v = v === 0 ? '0' : (v == null || v === '' ? '' : String(v));
@@ -2741,11 +2754,11 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
             document.getElementById('btnFinishRecon').addEventListener('click', function() {
                 // 演示：统计已作废明细数量（完成对账时批量释放其底表占用）
                 var voidCnt = document.querySelectorAll('#view-recBillDetail tbody tr[data-void="1"]').length;
-                var extra = voidCnt > 0 ? '<br><br>本次将释放 ' + voidCnt + ' 条作废明细占用的底表记录（释放后不再计入底表统计）。' +
+                var extra = voidCnt > 0 ? '<br><br>本次将释放 ' + voidCnt + ' 条作废明细占用的底表记录：<b>原占用记录R</b>作废标记置回正常、回池可被新账单占用（仍参与底表统计）；同时<b>新增作废追加记录R\'</b>，仅用于追溯不计入统计。' +
                     (document.querySelector('#view-recBillDetail tbody tr[data-void="1"] [data-nostrategy]') ? '<br>注：作废明细即使未指定结算策略也直接释放，不影响完成。' : '') : '';
                 showReconModal('完成对账',
                     '确认前将对全部有效明细（未作废）的结算策略绑定情况进行校验，有效明细需100%绑定结算策略后才允许完成。' + extra,
-                    '⚠ 操作不可逆：完成后将回写有效明细底表占用并生成账单管理数据、批量释放作废明细占用，状态置为已完成且不可再反结账。');
+                    '⚠ 操作不可逆：完成后将回写有效明细底表占用并生成账单管理数据、按上述规则释放作废明细占用，状态置为已完成且不可再反结账。');
                 setReconAction('finish');
             });
         } else if (currentStatus === 'done') {
