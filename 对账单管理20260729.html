@@ -1117,21 +1117,6 @@ body { display: flex; flex-direction: column; }
                 </div>
                 <div class="info-item-2col info-ro"><span class="info-label-2col">开始对账时间</span><span class="info-value-2col" id="val-StartAt">2026-07-31 13:59:00</span></div>
             </div>
-            <!-- 原始账单 -->
-            <div class="info-row-full" id="wrap-OrigBill">
-                <span class="info-label-2col">原始账单</span>
-                <span id="view-OrigBill" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
-                    <span class="info-value-2col file-link" id="val-OrigBillName">H30005_尾程派送.xlsx</span>
-                    <span class="bill-file-tag bill-file-tag-fail" id="tag-OrigBill">解析失败</span>
-                    <span id="overwrite-OrigBill" class="file-upload-row" style="display:none;">
-                        <input type="file" id="file-OrigBill" accept=".xlsx,.csv" style="display:none;">
-                        <button class="btn-query-outline" onclick="document.getElementById('file-OrigBill').click()" style="margin:0;">选择文件</button>
-                        <span class="file-name-display" id="fname-OrigBill">未选择任何文件</span>
-                        <button class="btn-upload" onclick="submitOrigBill()" style="margin:0;display:none;" id="btn-subOrig">提交文件</button>
-                        <span id="status-OrigBill"></span>
-                    </span>
-                </span>
-            </div>
             <!-- 标准账单 -->
             <div class="info-row-full" id="wrap-StdBills">
                 <span class="info-label-2col">标准账单</span>
@@ -2459,13 +2444,10 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
             }
         });
 
-        // 原始账单 / 标准账单：始终显示已有内容；草稿编辑模式时额外显示覆盖上传
-        var overwriteOrig = document.getElementById('overwrite-OrigBill');
+        // 标准账单：始终显示已有内容；草稿编辑模式时额外显示覆盖上传
         var overwriteStd = document.getElementById('overwrite-StdBills');
-        if (overwriteOrig) overwriteOrig.style.display = (isDraft && editMode) ? '' : 'none';
         if (overwriteStd) overwriteStd.style.display = (isDraft && editMode) ? '' : 'none';
         if (!isDraft || !editMode) {
-            resetOrigBillFile();
             resetStdBillsFile();
         }
 
@@ -2483,7 +2465,6 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
             syncViewToEdit();
         } else {
             // 取消编辑：重置文件选择
-            resetOrigBillFile();
             resetStdBillsFile();
         }
         editMode = on;
@@ -2548,17 +2529,6 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
             }
         }
 
-        // 同步原始账单结果
-        if (origBillFile && origBillState === 'done') {
-            document.getElementById('val-OrigBillName').textContent = origBillFile.name;
-            var t1 = document.getElementById('tag-OrigBill');
-            if (t1) { t1.textContent = '解析成功'; t1.className = 'bill-file-tag bill-file-tag-ok'; }
-        } else if (origBillFile && origBillState === 'failed') {
-            document.getElementById('val-OrigBillName').textContent = origBillFile.name;
-            var t2 = document.getElementById('tag-OrigBill');
-            if (t2) { t2.textContent = '解析失败'; t2.className = 'bill-file-tag bill-file-tag-fail'; }
-        }
-
         // 同步标准账单结果
         if (stdBillFile && stdBillState === 'done') {
             document.getElementById('val-StdBillsName').textContent = stdBillFile.name;
@@ -2571,7 +2541,6 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
         }
 
         editMode = false;
-        resetOrigBillFile();
         resetStdBillsFile();
         // 直接推进至待对账
         var prevStatus = currentStatus;
@@ -2579,62 +2548,6 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
         statusChanged(prevStatus, currentStatus);
         window.showLRToast('已推进至待对账');
     };
-
-    // ============ 原始账单文件导入 ============
-    var origBillFile = null;
-    var origBillState = 'idle'; // idle|uploading|done|failed
-    var origBillResult = '';
-
-    window.submitOrigBill = function() {
-        if (!origBillFile) return;
-        origBillState = 'uploading';
-        renderOrigBillStatus();
-        setTimeout(function() {
-            var success = Math.random() > 0.15;
-            origBillState = success ? 'done' : 'failed';
-            origBillResult = success ? '解析成功' : (origBillFile.name + ' 解析失败：无法识别文件格式');
-            renderOrigBillStatus();
-        }, 1500 + Math.random() * 2000);
-    };
-
-    function resetOrigBillFile() {
-        origBillFile = null;
-        origBillState = 'idle';
-        origBillResult = '';
-        var fnameEl = document.getElementById('fname-OrigBill');
-        var btnEl = document.getElementById('btn-subOrig');
-        var stEl = document.getElementById('status-OrigBill');
-        if (fnameEl) fnameEl.textContent = '未选择任何文件';
-        if (btnEl) btnEl.style.display = 'none';
-        if (stEl) stEl.innerHTML = '';
-    }
-
-    function renderOrigBillStatus() {
-        var stEl = document.getElementById('status-OrigBill');
-        if (!stEl) return;
-        if (origBillState === 'idle') { stEl.innerHTML = ''; }
-        else if (origBillState === 'uploading') { stEl.innerHTML = '<span class="file-status-tag file-status-processing">⟳ 解析中…</span>'; }
-        else if (origBillState === 'done') { stEl.innerHTML = '<span class="file-status-tag file-status-success">✓ 解析成功</span>'; }
-        else if (origBillState === 'failed') { stEl.innerHTML = '<span class="file-status-tag file-status-error">✗ ' + origBillResult + '</span>'; }
-    }
-
-    // 原始账单文件选择监听（DOM 已就绪，直接绑定）
-    (function setupOrigBillListener() {
-        var fOrig = document.getElementById('file-OrigBill');
-        if (fOrig) {
-            fOrig.addEventListener('change', function() {
-                if (this.files && this.files.length > 0) {
-                    origBillFile = this.files[0];
-                    var fnameEl = document.getElementById('fname-OrigBill');
-                    var btnEl = document.getElementById('btn-subOrig');
-                    if (fnameEl) fnameEl.textContent = origBillFile.name;
-                    if (btnEl) btnEl.style.display = '';
-                    origBillState = 'idle';
-                    renderOrigBillStatus();
-                }
-            });
-        }
-    })();
 
     // ============ 标准账单文件导入 ============
     var stdBillFile = null;
