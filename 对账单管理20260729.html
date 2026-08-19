@@ -433,8 +433,8 @@ body { display: flex; flex-direction: column; }
 /* 对账单ID 查询块：固定占第 1 列并纵向跨 3 行，由批量文本框撑满该列 */
 .filter-field.rec-id-field { grid-column: 1; grid-row: 1 / span 3; }
 .filter-field.rec-id-field .f-textarea { flex: 1; }
-/* 对账明细底表：ID批量输入跨 3 行，对齐到供应商 */
-.filter-field.rec-id-field.rec-base-id { grid-row: 1 / span 3; }
+/* 对账明细底表：ID批量输入纵向跨5行，独占第1列，其他查询条件不流入该列 */
+.filter-field.rec-id-field.rec-base-id { grid-row: 1 / span 5; }
 
 /* 时间类型 + 日期范围 组合（第一行右侧，跨 2 列，右端与「是否生成账单」对齐；最右列放供应商） */
 .filter-field.time-field { grid-column: span 2; }
@@ -1420,12 +1420,26 @@ body { display: flex; flex-direction: column; }
             </div>
         </div>
         <div class="filter-field">
-            <label class="f-label">锁定状态</label>
-            <select class="f-select"><option value="">全部</option><option>未锁定</option><option>已锁定</option><option>已完成</option></select>
+            <label class="f-label">明细状态</label>
+            <div class="multi-select">
+                <div class="multi-trigger">请选择</div>
+                <div class="multi-panel">
+                    <label><input type="checkbox" value="空">空（未占用）</label>
+                    <label><input type="checkbox" value="系统对比中">系统对比中</label>
+                    <label><input type="checkbox" value="待处理">待处理</label>
+                    <label><input type="checkbox" value="已处理">已处理</label>
+                    <label><input type="checkbox" value="已变更待复核">已变更待复核</label>
+                    <label><input type="checkbox" value="已完成">已完成</label>
+                </div>
+            </div>
         </div>
         <div class="filter-field">
             <label class="f-label">差异类型</label>
             <select class="f-select"><option value="">全部</option><option>金额差异</option><option>无差异</option><option>重量偏差（wb＞cp）</option><option>重量偏差（wb＜cp）</option><option>费用项无计费</option><option>供应商不一致</option><option>历史已对账</option><option>单据无计费</option><option>成本系统无单据</option><option>对账币种不一致</option></select>
+        </div>
+        <div class="filter-field">
+            <label class="f-label">供应商</label>
+            <select class="f-select"><option value="">全部</option><option>H30005 SHAOKE物流</option><option>H30001 DHL电子商务</option><option>H30003 泰嘉物流</option></select>
         </div>
         <div class="filter-field">
             <label class="f-label">结算策略</label>
@@ -1434,10 +1448,6 @@ body { display: flex; flex-direction: column; }
         <div class="filter-field">
             <label class="f-label">作废标记</label>
             <select class="f-select"><option value="">全部</option><option>正常</option><option>作废</option></select>
-        </div>
-        <div class="filter-field">
-            <label class="f-label">供应商</label>
-            <select class="f-select"><option value="">全部</option><option>H30005 SHAOKE物流</option><option>H30001 DHL电子商务</option><option>H30003 泰嘉物流</option></select>
         </div>
         <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
@@ -1455,17 +1465,17 @@ body { display: flex; flex-direction: column; }
                 <th>底表明细ID</th><th>对账单ID</th><th>对账单明细ID</th><th>系统ID</th><th>关联ID</th><th>关联类型</th><th>费用项</th><th>币种</th>
                 <th>账单金额</th><th>最新计算金额</th><th>快照计算金额</th><th>明细状态</th><th>差异类型</th><th>结算策略</th><th>付款金额</th>
                 <th>创建时间</th><th>完成对账时间</th><th>供应商编码</th><th>供应商名称</th>
-                <th>账单类型</th><th>单据时间</th><th>费用项编码</th><th>作废标记</th><th>锁定状态</th>
+                <th>账单类型</th><th>单据时间</th><th>费用项编码</th><th>作废标记</th>
             </tr></thead>
             <tbody>
-                <tr><td>R001</td><td>RC20260608001</td><td>BZ001</td><td>YD001</td><td>SBXTT0000286617YQ</td><td>跟踪号</td><td>燃油费</td><td>CNY</td><td>520</td><td>550</td><td>500</td><td><span class="status-tag status-review">已处理</span></td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+争议</td><td>520</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td>正常</td><td><span class="locked-tag locked-yes">已锁定</span></td></tr>
-                <tr><td>R003</td><td>RC20260608001</td><td>BZ002</td><td>YD001</td><td>SBXTT0000286618YQ</td><td>跟踪号</td><td>燃油费</td><td>USD</td><td>72</td><td>75</td><td>75</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+不争议</td><td>72</td><td>2026-06-01 10:00</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td>正常</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
-                <tr><td>R004</td><td>-</td><td>-</td><td>YD001</td><td>-</td><td>-</td><td>装卸费</td><td>CNY</td><td>-</td><td>120</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>ZXF</td><td>正常</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R005</td><td>-</td><td>-</td><td>YD001</td><td>-</td><td>-</td><td>清关费</td><td>CNY</td><td>-</td><td>430</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td>2026-05-21</td><td>QGF</td><td>正常</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R006</td><td>RC20260608001</td><td>BZ004</td><td>YD001</td><td>SBXTT0000286619YQ</td><td>跟踪号</td><td>仓储费</td><td>CNY</td><td>80</td><td>-</td><td>-</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-reject">费用项无计费</span></td><td>不支付+不争议</td><td>0</td><td>2026-06-06 09:15</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>CCF</td><td>正常</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
-                <tr><td>R007</td><td>-</td><td>-</td><td>YD002</td><td>-</td><td>-</td><td>基础运费</td><td>CNY</td><td>-</td><td>350</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-02 08:00</td><td>-</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>JCYF</td><td>正常</td><td><span class="locked-tag locked-no">未锁定</span></td></tr>
-                <tr><td>R008</td><td>RC20260608002</td><td>BZ005</td><td>YD002</td><td>SBXTT0000286620YQ</td><td>跟踪号</td><td>燃油附加费</td><td>CNY</td><td>90</td><td>85</td><td>85</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>90</td><td>2026-06-02 08:00</td><td>2026-06-08 14:30:25</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>RYFJF</td><td>正常</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
-                <tr><td>R009</td><td>RC20260608001</td><td>BZ010</td><td>YD001</td><td>SBXTT0000286621YQ</td><td>跟踪号</td><td>派送费</td><td>CNY</td><td>60</td><td>60</td><td>60</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>60</td><td>2026-06-06 09:20</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>PSF</td><td>作废</td><td><span class="locked-tag locked-done">已完成</span></td></tr>
+                <tr><td>R001</td><td>RC20260608001</td><td>BZ001</td><td>YD001</td><td>SBXTT0000286617YQ</td><td>跟踪号</td><td>燃油费</td><td>CNY</td><td>520</td><td>550</td><td>500</td><td><span class="status-tag status-review">已处理</span></td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+争议</td><td>520</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td>正常</td></tr>
+                <tr><td>R003</td><td>RC20260608001</td><td>BZ002</td><td>YD001</td><td>SBXTT0000286618YQ</td><td>跟踪号</td><td>燃油费</td><td>USD</td><td>72</td><td>75</td><td>75</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-review">金额差异</span></td><td>按账单金额支付+不争议</td><td>72</td><td>2026-06-01 10:00</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>YMF</td><td>正常</td></tr>
+                <tr><td>R004</td><td>-</td><td>-</td><td>YD001</td><td>-</td><td>-</td><td>装卸费</td><td>CNY</td><td>-</td><td>120</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>ZXF</td><td>正常</td></tr>
+                <tr><td>R005</td><td>-</td><td>-</td><td>YD001</td><td>-</td><td>-</td><td>清关费</td><td>CNY</td><td>-</td><td>430</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-01 10:00</td><td>-</td><td>H30001</td><td>DHL电子商务</td><td>国外清关</td><td>2026-05-21</td><td>QGF</td><td>正常</td></tr>
+                <tr><td>R006</td><td>RC20260608001</td><td>BZ004</td><td>YD001</td><td>SBXTT0000286619YQ</td><td>跟踪号</td><td>仓储费</td><td>CNY</td><td>80</td><td>-</td><td>-</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-reject">费用项无计费</span></td><td>不支付+不争议</td><td>0</td><td>2026-06-06 09:15</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>CCF</td><td>正常</td></tr>
+                <tr><td>R007</td><td>-</td><td>-</td><td>YD002</td><td>-</td><td>-</td><td>基础运费</td><td>CNY</td><td>-</td><td>350</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>2026-06-02 08:00</td><td>-</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>JCYF</td><td>正常</td></tr>
+                <tr><td>R008</td><td>RC20260608002</td><td>BZ005</td><td>YD002</td><td>SBXTT0000286620YQ</td><td>跟踪号</td><td>燃油附加费</td><td>CNY</td><td>90</td><td>85</td><td>85</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>90</td><td>2026-06-02 08:00</td><td>2026-06-08 14:30:25</td><td>H30003</td><td>泰嘉物流</td><td>内地空运</td><td>2026-05-22</td><td>RYFJF</td><td>正常</td></tr>
+                <tr><td>R009</td><td>RC20260608001</td><td>BZ010</td><td>YD001</td><td>SBXTT0000286621YQ</td><td>跟踪号</td><td>派送费</td><td>CNY</td><td>60</td><td>60</td><td>60</td><td><span class="status-tag status-done">已完成</span></td><td><span class="status-tag status-done">无差异</span></td><td>按账单金额支付+不争议</td><td>60</td><td>2026-06-06 09:20</td><td>2026-06-08 14:30:25</td><td>H30005</td><td>SHAOKE物流</td><td>国内转运</td><td>2026-05-20</td><td>PSF</td><td>作废</td></tr>
             </tbody>
         </table>
         </div>
@@ -2656,7 +2666,7 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
         } else if (currentStatus === 'pending') {
             reconArea.innerHTML = '<div class="recon-row"><button class="btn-recon btn-recon-start" id="btnStartRecon">开始对账</button></div>';
             document.getElementById('btnStartRecon').addEventListener('click', function() {
-                showReconModal('开始对账', '确认后将占用对账明细底表记录、截取快照并跑差异判定，确定开始？', '⚠ 请确认现有明细数据无误后再开始，开始后底表将被锁定');
+                showReconModal('开始对账', '确认后将占用对账明细底表记录、截取快照并跑差异判定，确定开始？', '⚠ 请确认现有明细数据无误后再开始，开始后底表记录将被占用');
                 setReconAction('start');
             });
         } else if (currentStatus === 'reconciling') {
