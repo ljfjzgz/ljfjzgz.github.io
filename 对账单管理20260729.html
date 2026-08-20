@@ -1753,7 +1753,7 @@ body { display: flex; flex-direction: column; }
     <div class="filter-box filter-grid">
         <div class="filter-field">
             <label class="f-label" style="color:#f56c6c;">*计提期间</label>
-            <select class="f-select"><option value="">请选择</option><option>2026-06</option><option selected>2026-05</option><option>2026-04</option></select>
+            <select class="f-select" id="accrualPeriodSelect"><option>2026-07</option><option>2026-06</option><option selected>2026-05</option><option>2026-04</option></select>
         </div>
         <div class="filter-field">
             <label class="f-label">供应商</label>
@@ -1811,19 +1811,13 @@ body { display: flex; flex-direction: column; }
         <div class="filter-field filter-actions">
             <label class="f-label">&nbsp;</label>
             <div class="action-btns">
-                <button class="btn-query" onclick="alert('查询（演示）')">查询</button>
+                <button class="btn-query" onclick="queryAccrual()">查询</button>
                 <button class="btn-cancel" onclick="resetFilter()">重置</button>
             </div>
         </div>
     </div>
 
-    <!-- 页面级提示条 -->
-    <div id="accrualStatusBar" style="background:#ecf5ff;border:1px solid #d9ecff;border-radius:3px;padding:10px 16px;margin-bottom:10px;font-size:12px;color:#606266;line-height:1.8;">
-        <span style="color:#409eff;font-weight:600;">ℹ️ 计提状态说明：</span>
-        计提期间 <b style="color:#303133;">2026-05</b> · 状态：<span id="accrualStatusText" style="color:#e6a23c;font-weight:bold;">● 未确认</span>（数据来源：<span id="accrualDataSource">底表实时数据 + 上期计提确认表（红冲）</span>）
-    </div>
-
-    <!-- 8列扁平主表 -->
+    <!-- 9列扁平主表 -->
     <div class="table-area">
         <div class="table-toolbar">
             <div class="toolbar-left">
@@ -1957,11 +1951,11 @@ body { display: flex; flex-direction: column; }
         <h4 style="color:#e74c3c;">⚠️ 确认计提</h4>
         <div style="background:#fdf6ec;border:1px solid #faecd8;border-radius:3px;padding:12px 14px;margin:12px 0;font-size:13px;color:#606266;line-height:1.8;">
             <div style="font-weight:600;color:#303133;margin-bottom:6px;">确认后将固化当期计提数据，操作不可逆！</div>
-            <div>• 已确认期间不可撤销、不可重新确认</div>
+            <div>• 已计提期间不可撤销、不可重新计提</div>
             <div>• 如需调整金额，请在金蝶系统通过冲销处理</div>
             <div>• 请仔细核对数据后谨慎操作</div>
         </div>
-        <div style="font-size:12px;color:#909399;margin-bottom:8px;">计提期间：<b style="color:#303133;">2026-05</b> · 数据条数：<b style="color:#303133;">11 条</b></div>
+        <div style="font-size:12px;color:#909399;margin-bottom:8px;">计提期间：<b id="accrualModalPeriod" style="color:#303133;">2026-05</b> · 数据条数：<b style="color:#303133;">11 条</b></div>
         <div class="modal-actions">
             <button class="btn-cancel" onclick="hideAccrualConfirmModal()">取消</button>
             <button class="btn-confirm" onclick="confirmAccrual()">确认计提</button>
@@ -2867,6 +2861,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 确认计提二次确认弹窗
 function showAccrualConfirmModal() {
+    var periodSelect = document.getElementById('accrualPeriodSelect');
+    var modalPeriod = document.getElementById('accrualModalPeriod');
+    if (periodSelect && modalPeriod) {
+        modalPeriod.textContent = periodSelect.value || periodSelect.options[periodSelect.selectedIndex].text;
+    }
     document.getElementById('accrualConfirmModal').classList.add('show');
 }
 function hideAccrualConfirmModal() {
@@ -2874,27 +2873,34 @@ function hideAccrualConfirmModal() {
 }
 function confirmAccrual() {
     hideAccrualConfirmModal();
-    // 模拟确认计提成功
-    var statusText = document.getElementById('accrualStatusText');
-    var dataSource = document.getElementById('accrualDataSource');
     var btnConfirm = document.getElementById('btnConfirmAccrual');
-    
-    if (statusText) {
-        statusText.textContent = '● 已确认';
-        statusText.style.color = '#67c23a';
-    }
-    if (dataSource) {
-        dataSource.textContent = '计提确认表（固化数据）';
-    }
     if (btnConfirm) {
         btnConfirm.disabled = true;
         btnConfirm.style.opacity = '0.5';
         btnConfirm.style.cursor = 'not-allowed';
         btnConfirm.style.background = '#909399';
         btnConfirm.style.borderColor = '#909399';
-        btnConfirm.title = '已确认期间不可撤销、不可重新确认';
+        btnConfirm.title = '已计提期间不可撤销、不可重新计提';
     }
-    alert('✅ 计提确认成功！\n期间 2026-05 的数据已固化，后续查询将读取固化数据。');
+    var periodSelect = document.getElementById('accrualPeriodSelect');
+    var period = periodSelect ? (periodSelect.value || periodSelect.options[periodSelect.selectedIndex].text) : '2026-05';
+    alert('✅ 计提成功！\n期间 ' + period + ' 的数据已固化，后续查询将读取固化数据。');
+}
+
+// 滚动计提表查询
+function queryAccrual() {
+    var periodSelect = document.getElementById('accrualPeriodSelect');
+    var period = periodSelect ? (periodSelect.value || periodSelect.options[periodSelect.selectedIndex].text) : '';
+    if (!period) {
+        alert('请选择计提期间');
+        return;
+    }
+    // 模拟查询：2026-04/2026-05已计提，其他期间未计提
+    if (period === '2026-04' || period === '2026-05') {
+        alert('查询成功：返回计提期间 ' + period + ' 的固化数据（演示）');
+    } else {
+        alert('该期间尚未计提，请先执行计提确认');
+    }
 }
 </script>
 
