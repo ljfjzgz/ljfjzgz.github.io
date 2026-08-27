@@ -2470,6 +2470,7 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
         }
         editMode = on;
         renderBasicInfo();
+        renderReconOps();
     };
 
     function syncViewToEdit() {
@@ -2543,11 +2544,10 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
 
         editMode = false;
         resetStdBillsFile();
-        // 直接推进至待对账
-        var prevStatus = currentStatus;
-        currentStatus = 'pending';
-        statusChanged(prevStatus, currentStatus);
-        window.showLRToast('已推进至待对账');
+        // 保存仅落库，不推进至待对账（推进由操作区「确认」按钮独立负责）
+        renderBasicInfo();
+        renderReconOps();
+        window.showLRToast('已保存草稿');
     };
 
     // ============ 标准账单文件导入 ============
@@ -2651,8 +2651,18 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
     function renderReconOps() {
         reconArea.innerHTML = '';
         if (currentStatus === 'draft') {
-            // 草稿态：通过基础信息区「编辑 → 保存」进入待对账，操作区不单独提供推进按钮
-            reconArea.innerHTML = '';
+            // 草稿态：操作区提供独立「确认」按钮推进至待对账；保存仅落库不推进（保存与确认解耦）
+            if (editMode) {
+                reconArea.innerHTML = ''; // 编辑模式下隐藏「确认」，须先保存或取消退回只读草稿态
+            } else {
+                reconArea.innerHTML = '<div class="recon-row"><button class="btn-recon btn-recon-start" id="btnConfirmDraft">确认</button></div>';
+                document.getElementById('btnConfirmDraft').addEventListener('click', function() {
+                    var prevStatus = currentStatus;
+                    currentStatus = 'pending';
+                    statusChanged(prevStatus, currentStatus);
+                    window.showLRToast('已推进至待对账');
+                });
+            }
         } else if (currentStatus === 'pending') {
             reconArea.innerHTML = '<div class="recon-row"><button class="btn-recon btn-recon-start" id="btnStartRecon">开始对账</button></div>';
             document.getElementById('btnStartRecon').addEventListener('click', function() {
