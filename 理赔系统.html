@@ -1845,8 +1845,8 @@
                     <div class="bg-white rounded-xl shadow-sm border border-emerald-100 overflow-hidden">
                         <div class="overflow-x-auto">
                             <table class="w-full whitespace-nowrap" style="min-width: 2800px;">
-                                <thead class="bg-gradient-to-r from-emerald-50 to-teal-50">
-                                    <tr>
+                            <thead>
+<tr>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">处理号</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">客户代码</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">客单号</th>
@@ -1859,7 +1859,6 @@
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">赔付次数</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">赔付金额CNY</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">申诉金额CNY</th>
-                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">净赔付金额CNY</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">索赔次数</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">索赔金额CNY</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">确认金额CNY</th>
@@ -1867,9 +1866,8 @@
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">赔付索赔差异CNY</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">扣费时间</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">出库时间</th>
-                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">匹配状态</th>
-                                    </tr>
-                                </thead>
+                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">匹配状态</th>                                    </tr>
+</thead>
                                 <tbody class="divide-y divide-emerald-100">
                                     <!-- 有赔付无索赔 -->
                                     <tr class="hover:bg-emerald-50/50 transition-colors">
@@ -1885,7 +1883,6 @@
                                         <td class="px-3 py-3 text-sm text-gray-600">3</td>
                                         <td class="px-3 py-3 text-sm text-red-600 font-medium">CNY 181.25</td>
                                         <td class="px-3 py-3 text-sm text-amber-600 font-medium">CNY 181.25</td>
-                                        <td class="px-3 py-3 text-sm text-gray-600">CNY 0.00</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">0</td>
                                         <td class="px-3 py-3 text-sm text-gray-500">-</td>
                                         <td class="px-3 py-3 text-sm text-gray-500">-</td>
@@ -1896,8 +1893,7 @@
                                         <td class="px-3 py-3 text-sm"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs">有赔付无索赔</span></td>
                                     </tr>
                                     <!-- 有索赔无赔付 -->
-                                    <tr class="hover:bg-emerald-50/50 transition-colors">
-                                        <td class="px-3 py-3 text-sm"><a href="#" onclick="showPage('order-base-detail','WNBAA0465333020YQ')" class="text-emerald-600 hover:text-emerald-800 font-medium underline">WNBAA0465333020YQ</a></td>
+                                    <tr class="hover:bg-emerald-50/50 transition-colors">                                        <td class="px-3 py-3 text-sm"><a href="#" onclick="showPage('order-base-detail','WNBAA0465333020YQ')" class="text-emerald-600 hover:text-emerald-800 font-medium underline">WNBAA0465333020YQ</a></td>
                                         <td class="px-3 py-3 text-sm text-gray-600">WNB989821</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">XM1YE49206190</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">H048SA0084680985</td>
@@ -1909,7 +1905,6 @@
                                         <td class="px-3 py-3 text-sm text-gray-600">0</td>
                                         <td class="px-3 py-3 text-sm text-gray-500">-</td>
                                         <td class="px-3 py-3 text-sm text-gray-500">-</td>
-                                        <td class="px-3 py-3 text-sm text-gray-500">-</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">2</td>
                                         <td class="px-3 py-3 text-sm text-emerald-600 font-medium">CNY 5075.00</td>
                                         <td class="px-3 py-3 text-sm text-blue-600 font-medium">CNY 4567.50</td>
@@ -1917,10 +1912,7 @@
                                         <td class="px-3 py-3 text-sm text-gray-500">-</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">2026-05-29 10:20:00</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">2026-05-21 09:30:00</td>
-                                        <td class="px-3 py-3 text-sm"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs">有索赔无赔付</span></td>
-                                    </tr>
-                                    <!-- 有赔付有索赔 -->
-                                    <tr class="hover:bg-emerald-50/50 transition-colors">
+                                        <td class="px-3 py-3 text-sm"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded text-xs">有索赔无赔付</span></td>                                    </tr>                                    <tr class="hover:bg-emerald-50/50 transition-colors">
                                         <td class="px-3 py-3 text-sm"><a href="#" onclick="showPage('order-base-detail','WNBAA0465333015YQ')" class="text-emerald-600 hover:text-emerald-800 font-medium underline">WNBAA0465333015YQ</a></td>
                                         <td class="px-3 py-3 text-sm text-gray-600">WNB989822</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">XM1YE49206195</td>
@@ -1933,7 +1925,6 @@
                                         <td class="px-3 py-3 text-sm text-gray-600">1</td>
                                         <td class="px-3 py-3 text-sm text-red-600 font-medium">CNY 362.50</td>
                                         <td class="px-3 py-3 text-sm text-gray-500">-</td>
-                                        <td class="px-3 py-3 text-sm text-red-600 font-medium">CNY 362.50</td>
                                         <td class="px-3 py-3 text-sm text-gray-600">1</td>
                                         <td class="px-3 py-3 text-sm text-emerald-600 font-medium">CNY 500.00</td>
                                         <td class="px-3 py-3 text-sm text-blue-600 font-medium">CNY 500.00</td>
@@ -1943,8 +1934,8 @@
                                         <td class="px-3 py-3 text-sm text-gray-600">2026-05-20 10:00:00</td>
                                         <td class="px-3 py-3 text-sm"><span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs">有赔付有索赔</span></td>
                                     </tr>
-                                </tbody>
-                            </table>
+                                                        </tbody>
+</table>
                         </div>
                         <!-- Pagination -->
                         <div class="flex items-center justify-between px-6 py-4 bg-emerald-50/30 border-t border-emerald-100">
@@ -2014,7 +2005,6 @@
                                     <div class="flex justify-between"><span class="text-gray-500">索赔金额CNY</span><span class="text-gray-500">-</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">确认金额CNY</span><span class="text-gray-500">-</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">申诉金额CNY</span><span class="text-gray-500">-</span></div>
-                                    <div class="flex justify-between"><span class="text-gray-500">净赔付金额CNY</span><span class="font-medium text-red-600">CNY 500.00</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">索赔确认差异CNY</span><span class="text-gray-500">-</span></div>
                                     <div class="flex justify-between"><span class="text-gray-500">赔付索赔差异CNY</span><span class="font-medium text-red-600">CNY 500.00</span></div>
                                 </dl>
@@ -2640,19 +2630,16 @@
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">订单数量</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">赔付金额CNY</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">申诉金额CNY</th>
-                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">净赔付金额CNY</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">索赔金额CNY</th>
                                         <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">确认金额CNY</th>
-                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">赔付索赔差异CNY</th>
-                                    </tr>
-                                </thead>
+                                        <th class="px-4 py-3 text-left font-semibold text-gray-700 text-sm">赔付索赔差异CNY</th>                                    </tr>
+</thead>
                                 <tbody class="divide-y divide-emerald-100">
                                     <tr class="hover:bg-emerald-50/50 transition-colors cursor-pointer" onclick="showPage('order-base')">
                                         <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs">有赔付无索赔</span></td>
                                         <td class="px-4 py-3 text-sm text-gray-900 font-medium">156</td>
                                         <td class="px-4 py-3 text-sm text-red-600 font-medium">¥89,560.00</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">-</td>
-                                        <td class="px-4 py-3 text-sm text-red-600 font-medium">¥89,560.00</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">-</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">-</td>
                                         <td class="px-4 py-3 text-sm text-red-600 font-medium">¥89,560.00</td>
@@ -2662,24 +2649,19 @@
                                         <td class="px-4 py-3 text-sm text-gray-900 font-medium">23</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">-</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">-</td>
-                                        <td class="px-4 py-3 text-sm text-gray-600">-</td>
                                         <td class="px-4 py-3 text-sm text-emerald-600 font-medium">¥15,230.00</td>
                                         <td class="px-4 py-3 text-sm text-blue-600 font-medium">¥12,184.00</td>
-                                        <td class="px-4 py-3 text-sm text-red-600 font-medium">-¥12,184.00</td>
-                                    </tr>
-                                    <tr class="hover:bg-emerald-50/50 transition-colors cursor-pointer" onclick="showPage('order-base')">
+                                        <td class="px-4 py-3 text-sm text-red-600 font-medium">-¥12,184.00</td>                                    </tr>                                    <tr class="hover:bg-emerald-50/50 transition-colors cursor-pointer" onclick="showPage('order-base')">
                                         <td class="px-4 py-3 text-sm"><span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs">有赔付有索赔</span></td>
                                         <td class="px-4 py-3 text-sm text-gray-900 font-medium">1,203</td>
                                         <td class="px-4 py-3 text-sm text-red-600 font-medium">¥562,300.00</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">-</td>
-                                        <td class="px-4 py-3 text-sm text-red-600 font-medium">¥562,300.00</td>
                                         <td class="px-4 py-3 text-sm text-emerald-600 font-medium">¥480,120.00</td>
                                         <td class="px-4 py-3 text-sm text-blue-600 font-medium">¥455,000.00</td>
                                         <td class="px-4 py-3 text-sm text-red-600 font-medium">¥107,300.00</td>
                                     </tr>
-
-                                </tbody>
-                            </table>
+                                                        </tbody>
+</table>
                         </div>
                     </div>
 
@@ -4675,7 +4657,7 @@
                 processingNo: 'WNBAA0465333013YQ', customerCode: 'WNB989820', customerOrderNo: 'XM1YE49206188',
                 trackNo: 'H048SA0084680981', destCountry: 'GB', channelCode: 'HERMESUK_ND_DIRECT',
                 productCode: 'WBUKPEXPEC', blNo: '860-12345678', boxNo: 'SZCWC26052800486',
-                claimCount: 3, claimAmountCNY: '181.25', appealAmountCNY: '181.25', netClaimAmountCNY: '0.00',
+                claimCount: 3, claimAmountCNY: '181.25', appealAmountCNY: '181.25',
                 supplierCount: 0, supplierAmountCNY: '-', confirmedAmountCNY: '-',
                 supplierDiffCNY: '-', claimSupplierDiffCNY: '181.25',
                 deductionTime: '2026-05-28 14:35:00', outboundTime: '2026-05-20 10:00:00',
@@ -4691,7 +4673,7 @@
                 processingNo: 'WNBAA0465333020YQ', customerCode: 'WNB989821', customerOrderNo: 'XM1YE49206190',
                 trackNo: 'H048SA0084680985', destCountry: 'DE', channelCode: 'DHL-EXPRESS',
                 productCode: 'WBDEXPEC', blNo: '860-87654321', boxNo: 'SZCWC26052800487',
-                claimCount: 0, claimAmountCNY: '-', appealAmountCNY: '-', netClaimAmountCNY: '-',
+                claimCount: 0, claimAmountCNY: '-', appealAmountCNY: '-',
                 supplierCount: 2, supplierAmountCNY: '5075.00', confirmedAmountCNY: '4567.50',
                 supplierDiffCNY: '507.50', claimSupplierDiffCNY: '-',
                 deductionTime: '2026-05-29 10:20:00', outboundTime: '2026-05-21 09:30:00',
@@ -4706,7 +4688,7 @@
                 processingNo: 'WNBAA0465333015YQ', customerCode: 'WNB989822', customerOrderNo: 'XM1YE49206195',
                 trackNo: 'H048SA0084680990', destCountry: 'FR', channelCode: 'FEDEX-GROUND',
                 productCode: 'WBFRPEXPEC', blNo: '860-11223344', boxNo: 'SZCWC26052800488',
-                claimCount: 1, claimAmountCNY: '362.50', appealAmountCNY: '-', netClaimAmountCNY: '362.50',
+                claimCount: 1, claimAmountCNY: '362.50', appealAmountCNY: '-',
                 supplierCount: 1, supplierAmountCNY: '500.00', confirmedAmountCNY: '500.00',
                 supplierDiffCNY: '0.00', claimSupplierDiffCNY: '-137.50',
                 deductionTime: '2026-05-28 14:35:00', outboundTime: '2026-05-20 10:00:00',
@@ -4799,7 +4781,6 @@
                 { label: '索赔金额CNY', value: d.supplierAmountCNY, prefix: 'CNY ' },
                 { label: '确认金额CNY', value: d.confirmedAmountCNY, prefix: 'CNY ' },
                 { label: '申诉金额CNY', value: d.appealAmountCNY, prefix: 'CNY ' },
-                { label: '净赔付金额CNY', value: d.netClaimAmountCNY, prefix: 'CNY ' },
                 { label: '索赔确认差异CNY', value: d.supplierDiffCNY, prefix: 'CNY ' },
                 { label: '赔付索赔差异CNY', value: d.claimSupplierDiffCNY, prefix: 'CNY ' }
             ];
