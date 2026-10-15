@@ -1880,8 +1880,8 @@ body { display: flex; flex-direction: column; }
 <div class="modal-overlay" id="reconConfirmModal" data-page-node-id="ruEEQ2GwulGfNdamoerlgG">
     <div class="modal-box" data-page-node-id="I7KNDutgW8Gyumc5FK1cH1">
         <h4 id="reconModalTitle" data-page-node-id="mn2fIAFNYrZ2uHHULmbnR9">操作确认</h4>
-        <p id="reconModalMsg" data-page-node-id="ITNj2mVc8CsWM5Ev8mlleE"></p>
-        <p class="modal-warn" id="reconModalWarn" data-page-node-id="wnpS3sMxEivfR6oBfIHENK"></p>
+        <p id="reconModalMsg" style="white-space:pre-wrap;" data-page-node-id="ITNj2mVc8CsWM5Ev8mlleE"></p>
+        <p class="modal-warn" id="reconModalWarn" style="white-space:pre-wrap;" data-page-node-id="wnpS3sMxEivfR6oBfIHENK"></p>
         <div class="modal-actions" data-page-node-id="VYBcYEFRGBrD7bA7gQEqRU">
             <button class="btn-cancel" onclick="hideReconModal()" data-page-node-id="gtjCMbGN8Q46TY9OAJ9HlC">取消</button>
             <button class="btn-confirm" id="reconModalConfirm" data-page-node-id="gD2clRiVp95OcwY84z8pyb">确认</button>
@@ -2678,17 +2678,16 @@ document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
         } else if (currentStatus === 'reconciling') {
             reconArea.innerHTML = '<div class="recon-row"><button class="btn-recon btn-recon-cancel" id="btnCancelRecon">取消对账</button><button class="btn-recon btn-recon-finish" id="btnFinishRecon">完成对账</button></div>';
             document.getElementById('btnCancelRecon').addEventListener('click', function() {
-                showReconModal('取消对账', '将释放底表占用、清除快照计算金额，回到待对账。', '逐条明细与已确认结算策略将保留，取消后可重新开始对账。');
+                showReconModal('取消对账', '将释放底表占用，回到待对账。');
                 setReconAction('cancel');
             });
             document.getElementById('btnFinishRecon').addEventListener('click', function() {
                 // 演示：统计已作废明细数量（完成对账时批量释放其底表占用）
                 var voidCnt = document.querySelectorAll('#view-recBillDetail tbody tr[data-void="1"]').length;
-                var extra = voidCnt > 0 ? '<br><br>本次将释放 ' + voidCnt + ' 条作废明细占用的底表记录：<b>原占用记录R</b>作废标记置回正常、回池可被新账单占用（仍参与底表统计）；同时<b>新增作废追加记录R\'</b>，仅用于追溯不计入统计。' +
-                    (document.querySelector('#view-recBillDetail tbody tr[data-void="1"] [data-nostrategy]') ? '<br>注：作废明细即使未指定结算策略也直接释放，不影响完成。' : '') : '';
+                var extra = voidCnt > 0 ? '\n\n本次将释放 ' + voidCnt + ' 条作废明细占用的底表记录' : '';
                 showReconModal('完成对账',
-                    '确认前将对全部有效明细（未作废）的结算策略绑定情况进行校验，有效明细需100%绑定结算策略后才允许完成。' + extra,
-                    '⚠ 操作不可逆：完成后将回写有效明细底表占用并生成账单管理数据、按上述规则释放作废明细占用，状态置为已完成且不可再反结账。');
+                    '确认完成对账？完成后将：\n① 回写有效明细的底表占用并生成账单管理数据；\n② 批量释放作废明细占用的底表记录（原占用记录R回池可被新账单占用；同时新增作废追加记录R\'，仅用于追溯不计入统计）；\n③ 状态置为「已完成」且不可再反结账。\n确认继续？' + extra,
+                    '⚠ 执行结果原子操作，任一失败整体回滚至对账中。');
                 setReconAction('finish');
             });
         } else if (currentStatus === 'done') {
