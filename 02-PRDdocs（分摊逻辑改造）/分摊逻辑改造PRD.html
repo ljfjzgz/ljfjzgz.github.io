@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档</title>
+    <script src="./site.config.js"></script>
+    <script src="./vendor/marked.min.js"></script>
+    <style>
+        :root {
+            --sbw: 268px;
+            --tocw: 0px;
+
+            --bg: #faf8f5;
+            --card: #ffffff;
+            --ink: #1c1a17;
+            --ink-2: #3a3733;
+            --body: #4a4640;
+            --muted: #8b857c;
+            --faint: #c3bdb4;
+            --line: #e8e4dd;
+            --line-soft: #f1ede6;
+
+            --accent: #0f766e;
+            --accent-2: #17a394;
+            --accent-soft: #e8f3f1;
+            --amber: #a24a10;
+            --amber-soft: #fdeee0;
+            --blue: #1b45c4;
+            --blue-soft: #eaefff;
+
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            --serif: "Songti SC", "Source Han Serif SC", "Noto Serif CJK SC", "SimSun", Georgia, serif;
+            --mono: "SF Mono", "Cascadia Mono", Consolas, Monaco, "Courier New", monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--body);
+            font-size: 15px;
+            line-height: 1.9;
+        }
+
+        /* ---------- 侧栏 ---------- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: var(--sbw);
+            background: #171a1e;
+            display: flex;
+            flex-direction: column;
+            z-index: 30;
+            border-right: 1px solid #0e1114;
+        }
+
+        .brand {
+            padding: 26px 22px 22px;
+            border-bottom: 1px solid rgba(255, 255, 255, .07);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .brand-mark {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            background: linear-gradient(145deg, #1cb3a1, #0b5e57);
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: .02em;
+            flex-shrink: 0;
+        }
+
+        .brand-title {
+            font-size: 14.5px;
+            font-weight: 600;
+            color: #f2eee7;
+            letter-spacing: .02em;
+            line-height: 1.4;
+        }
+
+        .brand-sub {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: #6f6a63;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .nav {
+            padding: 14px 12px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .nav-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .16em;
+            color: #5b5650;
+            padding: 6px 12px 10px;
+            text-transform: uppercase;
+        }
+
+        .nav-item {
+            width: 100%;
+            display: flex;
+            gap: 11px;
+            align-items: flex-start;
+            padding: 11px 12px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            text-align: left;
+            color: #a8a29a;
+            font-size: 13.5px;
+            line-height: 1.55;
+            border-radius: 9px;
+            transition: background .18s, color .18s;
+            font-family: inherit;
+            position: relative;
+        }
+
+        .nav-item + .nav-item {
+            margin-top: 2px;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, .05);
+            color: #e8e3db;
+        }
+
+        .nav-item.active {
+            background: rgba(23, 163, 148, .13);
+            color: #f4f1ea;
+        }
+
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 11px;
+            bottom: 11px;
+            width: 2px;
+            border-radius: 2px;
+            background: var(--accent-2);
+        }
+
+        .nav-num {
+            font-family: var(--mono);
+            font-size: 10.5px;
+            color: #5b5650;
+            padding-top: 3px;
+            letter-spacing: .04em;
+            flex-shrink: 0;
+        }
+
+        .nav-item.active .nav-num {
+            color: var(--accent-2);
+        }
+
+        .side-foot {
+            padding: 14px 22px 18px;
+            border-top: 1px solid rgba(255, 255, 255, .07);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .08em;
+            color: #5b5650;
+        }
+
+        /* ---------- 阅读进度 ---------- */
+        .progress {
+            position: fixed;
+            top: 0;
+            left: var(--sbw);
+            right: var(--tocw);
+            height: 2px;
+            z-index: 40;
+            pointer-events: none;
+        }
+
+        .progress i {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: var(--accent-2);
+            transition: width .12s linear;
+        }
+
+        /* ---------- 主区 ---------- */
+        .main {
+            margin-left: var(--sbw);
+            margin-right: var(--tocw);
+            min-height: 100vh;
+        }
+
+        .wrap {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 56px 130px;
+            transition: opacity .18s ease;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 74px 0 32px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--line);
+            overflow: hidden;
+        }
+
+        .hero-num {
+            position: absolute;
+            right: -14px;
+            top: 26px;
+            font-family: var(--serif);
+            font-size: 176px;
+            line-height: 1;
+            color: #ede8df;
+            letter-spacing: -.05em;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .hero-eyebrow {
+            position: relative;
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: .18em;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            position: relative;
+            font-family: var(--serif);
+            font-size: 39px;
+            line-height: 1.3;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: .01em;
+            margin-bottom: 20px;
+            max-width: 15em;
+        }
+
+        .hero-meta {
+            position: relative;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chip-meta {
+            font-size: 11.5px;
+            color: var(--muted);
+            border: 1px solid var(--line);
+            background: #fff;
+            padding: 2px 10px;
+            border-radius: 99px;
+            line-height: 1.8;
+        }
+
+        /* ---------- 正文 ---------- */
+        .prose {
+            font-size: 15px;
+            line-height: 1.95;
+            color: var(--body);
+        }
+
+        /* 正文与表格同宽，跟随版心 */
+
+        .prose > h2:first-child {
+            margin-top: 0;
+        }
+
+        .prose h2 {
+            position: relative;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: .01em;
+            margin: 54px 0 18px;
+            padding-left: 15px;
+            scroll-margin-top: 34px;
+        }
+
+        .prose h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: .46em;
+            width: 4px;
+            height: 13px;
+            border-radius: 2px;
+            background: var(--accent);
+        }
+
+        .prose h3 {
+            font-size: 15.5px;
+            font-weight: 600;
+            color: var(--ink-2);
+            margin: 34px 0 12px;
+            scroll-margin-top: 34px;
+        }
+
+        .prose p {
+            margin: 14px 0;
+        }
+
+        .prose strong {
+            color: var(--ink);
+            font-weight: 600;
+        }
+
+        .prose ul,
+        .prose ol {
+            margin: 14px 0;
+            padding-left: 22px;
+        }
+
+        .prose li {
+            margin: 7px 0;
+        }
+
+        .prose li::marker {
+            color: var(--faint);
+        }
+
+        .prose li > ul,
+        .prose li > ol {
+            margin: 6px 0;
+        }
+
+        .prose hr {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 36px 0;
+        }
+
+        .prose a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(15, 118, 110, .3);
+        }
+
+        .prose a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* 提示条 */
+        .prose p.callout {
+            background: var(--accent-soft);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 10px 10px 0;
+            padding: 15px 18px;
+            color: #16524d;
+            margin: 22px 0;
+            line-height: 1.9;
+        }
+
+        .prose p.callout strong {
+            color: #0d4a45;
+        }
+
+        /* 表格 */
+        .table-wrap {
+            margin: 22px 0;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            overflow: auto;
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(28, 26, 23, .035);
+        }
+
+        .prose table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            line-height: 1.75;
+        }
+
+        .prose th {
+            background: #f6f3ee;
+            color: var(--ink-2);
+            font-weight: 600;
+            text-align: left;
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--line);
+            white-space: nowrap;
+            font-size: 13px;
+        }
+
+        .prose td {
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--line-soft);
+            vertical-align: top;
+            color: var(--body);
+            word-break: break-word;
+        }
+
+        .prose tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .prose tbody tr {
+            transition: background .12s;
+        }
+
+        .prose tbody tr:hover {
+            background: #fbf9f5;
+        }
+
+        .prose th:first-child,
+        .prose td:first-child {
+            padding-left: 16px;
+        }
+
+        .prose th:last-child,
+        .prose td:last-child {
+            padding-right: 16px;
+        }
+
+        td.dash {
+            color: var(--faint);
+        }
+
+        td.nw,
+        th.nw {
+            white-space: nowrap;
+        }
+
+        /* 状态标签 */
+        .chip {
+            display: inline-block;
+            padding: 1px 8px;
+            border-radius: 5px;
+            font-size: 11.5px;
+            font-weight: 600;
+            line-height: 1.75;
+            letter-spacing: .02em;
+            vertical-align: 1px;
+            white-space: nowrap;
+        }
+
+        .chip-add {
+            background: var(--amber-soft);
+            color: var(--amber);
+        }
+
+        .chip-chg {
+            background: var(--blue-soft);
+            color: var(--blue);
+        }
+
+        .chip-same,
+        .chip-old {
+            background: #f1efe9;
+            color: #776f66;
+        }
+
+        /* 公式 / 代码块：与表格同一套白卡语言 */
+        .prose pre {
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 16px 20px;
+            overflow-x: auto;
+            margin: 20px 0;
+            box-shadow: 0 1px 2px rgba(28, 26, 23, .035);
+        }
+
+        .prose pre code {
+            font-family: var(--mono);
+            font-size: 12.5px;
+            line-height: 2;
+            color: #3a3733;
+            background: none;
+            padding: 0;
+            border: none;
+        }
+
+        .prose code {
+            font-family: var(--mono);
+            font-size: 12.5px;
+            background: #f1ede6;
+            color: #8a4b2a;
+            padding: 1.5px 6px;
+            border-radius: 5px;
+        }
+
+        /* ---------- 上下篇 ---------- */
+        .pager {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-top: 72px;
+            padding-top: 30px;
+            border-top: 1px solid var(--line);
+        }
+
+        .pager a {
+            display: block;
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px 18px;
+            text-decoration: none;
+            transition: border-color .18s, box-shadow .18s, transform .18s;
+        }
+
+        .pager a:hover {
+            border-color: #d6cfc4;
+            box-shadow: 0 6px 18px rgba(28, 26, 23, .07);
+            transform: translateY(-1px);
+        }
+
+        .pager a.next {
+            text-align: right;
+        }
+
+        .pg-h {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .14em;
+            color: var(--faint);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .pg-t {
+            font-size: 13.5px;
+            color: var(--ink-2);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* ---------- 右侧目录（已停用，宽度让给正文） ---------- */
+        .toc {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: var(--tocw);
+            height: 100vh;
+            padding: 76px 22px 40px 2px;
+            overflow-y: auto;
+            border-left: 1px solid var(--line);
+            background: var(--bg);
+        }
+
+        .toc-title {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: .16em;
+            color: var(--faint);
+            text-transform: uppercase;
+            padding-left: 12px;
+            margin-bottom: 12px;
+        }
+
+        .toc a {
+            display: block;
+            font-size: 12.5px;
+            line-height: 1.55;
+            color: #948e85;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-left: 1.5px solid transparent;
+            transition: color .16s, border-color .16s;
+        }
+
+        .toc a.lv2 {
+            padding-left: 24px;
+            font-size: 12px;
+            color: #a9a29a;
+        }
+
+        .toc a:hover {
+            color: var(--ink-2);
+        }
+
+        .toc a.on {
+            color: var(--accent);
+            border-left-color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* ---------- 状态页 ---------- */
+        .state {
+            padding: 120px 0;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .state b {
+            display: block;
+            color: var(--ink-2);
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .state code {
+            font-family: var(--mono);
+            font-size: 12.5px;
+            background: #f1ede6;
+            color: #8a4b2a;
+            padding: 2px 7px;
+            border-radius: 5px;
+        }
+
+        /* ---------- 滚动条 ---------- */
+        ::-webkit-scrollbar {
+            width: 9px;
+            height: 9px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ddd7ce;
+            border-radius: 5px;
+            border: 2px solid var(--bg);
+        }
+
+        .sidebar ::-webkit-scrollbar-thumb {
+            background: #33373d;
+            border-color: #171a1e;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #c6bfb4;
+        }
+
+        @media (max-width: 1240px) {
+            :root {
+                --tocw: 0px;
+            }
+
+            .toc {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            :root {
+                --sbw: 0px;
+            }
+
+            .sidebar {
+                position: static;
+                width: auto;
+                flex-direction: row;
+                align-items: center;
+                border-right: none;
+                border-bottom: 1px solid #0e1114;
+                overflow-x: auto;
+            }
+
+            .brand {
+                border-bottom: none;
+                border-right: 1px solid rgba(255, 255, 255, .07);
+                flex-shrink: 0;
+                padding: 16px 18px;
+            }
+
+            .nav {
+                display: flex;
+                padding: 10px;
+                flex: 0 0 auto;
+            }
+
+            .nav-label {
+                display: none;
+            }
+
+            .nav-item {
+                width: auto;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+
+            .side-foot {
+                display: none;
+            }
+
+            .progress {
+                left: 0;
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .wrap {
+                padding: 0 22px 90px;
+            }
+
+            .hero {
+                padding: 46px 0 26px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero-num {
+                font-size: 116px;
+                top: 18px;
+            }
+
+            .pager {
+                grid-template-columns: 1fr;
+            }
+
+            .pager a.next {
+                text-align: left;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress"><i id="progressBar"></i></div>
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark" id="brandMark">·</div>
+            <div>
+                <div class="brand-title" id="brandTitle">文档</div>
+                <div class="brand-sub" id="brandSub">Docs</div>
+            </div>
+        </div>
+        <div class="nav" id="nav">
+            <div class="nav-label">文档</div>
+        </div>
+        <div class="side-foot">
+            <span id="footCount">4 篇</span>
+            <span>ALT + ← →</span>
+        </div>
+    </aside>
+
+    <div class="main">
+        <div class="wrap" id="wrap">
+            <div class="state">
+                <b>正在载入</b>
+                请稍候
+            </div>
+        </div>
+    </div>
+
+    <aside class="toc">
+        <div class="toc-title">本页目录</div>
+        <div id="tocList"></div>
+    </aside>
+
+    <script>
+        const SITE = window.SITE || {};
+        const DOCS = SITE.docs || [];
+
+        const STATUS = { '新增': 'add', '变更': 'chg', '不变': 'same', '沿用': 'same', '原有': 'old' };
+
+        // 表格列宽策略，由 site.config.js 的 layout 决定；不配则全部按内容自适应
+        const LAYOUT = SITE.layout || {};
+        const KEEP_WIDTH = LAYOUT.keepWidth || [];
+        const MIN_WIDTH = LAYOUT.minWidth || {};
+
+        let current = -1;
+        let busy = false;
+
+        /* ---------- 侧栏 ---------- */
+        function buildNav() {
+            const nav = document.getElementById('nav');
+            DOCS.forEach(function (d, i) {
+                const btn = document.createElement('button');
+                btn.className = 'nav-item';
+                btn.type = 'button';
+                btn.innerHTML = '<span class="nav-num">' + d.num + '</span><span class="nav-label-text">' + d.title + '</span>';
+                btn.addEventListener('click', function () { load(i); });
+                nav.appendChild(btn);
+            });
+            document.getElementById('footCount').textContent = DOCS.length + ' 篇';
+        }
+
+        function markActive(i) {
+            const items = document.querySelectorAll('.nav-item');
+            items.forEach(function (el, k) { el.classList.toggle('active', k === i); });
+        }
+
+        /* ---------- Hero ---------- */
+        function heroHTML(d) {
+            return '<header class="hero">' +
+                '<div class="hero-num">' + d.num + '</div>' +
+                '<div class="hero-eyebrow">' + d.kind + ' · DOC ' + d.num + '</div>' +
+                '<h1>' + d.title + '</h1>' +
+                '<div class="hero-meta">' +
+                (SITE.title ? '<span class="chip-meta">' + SITE.title + '</span>' : '') +
+                '<span class="chip-meta">第 ' + Number(d.num) + ' / ' + DOCS.length + ' 篇</span>' +
+                '<span class="chip-meta" id="metaSec">— 节</span>' +
+                '</div>' +
+                '</header>';
+        }
+
+        function pagerHTML(i) {
+            const prev = DOCS[i - 1];
+            const next = DOCS[i + 1];
+            let h = '<nav class="pager">';
+            h += prev
+                ? '<a href="javascript:void(0)" data-go="' + (i - 1) + '"><div class="pg-h">上一篇</div><div class="pg-t">' + prev.title + '</div></a>'
+                : '<span></span>';
+            h += next
+                ? '<a href="javascript:void(0)" data-go="' + (i + 1) + '" class="next"><div class="pg-h">下一篇</div><div class="pg-t">' + next.title + '</div></a>'
+                : '<span></span>';
+            h += '</nav>';
+            return h;
+        }
+
+        /* ---------- 渲染增强 ---------- */
+        function enhance(root) {
+            // 表格外框
+            Array.prototype.forEach.call(root.querySelectorAll('table'), function (t) {
+                const box = document.createElement('div');
+                box.className = 'table-wrap';
+                t.parentNode.insertBefore(box, t);
+                box.appendChild(t);
+
+                // 短列不被压缩换行；长列保底宽度
+                const ths = Array.prototype.slice.call(t.querySelectorAll('thead th'));
+                const cols = [];
+                const widths = {};
+                ths.forEach(function (th, i) {
+                    const name = th.textContent.trim();
+                    if (KEEP_WIDTH.indexOf(name) > -1) cols.push(i);
+                    if (MIN_WIDTH[name]) widths[i] = MIN_WIDTH[name];
+                });
+                if (!cols.length && !Object.keys(widths).length) return;
+
+                Array.prototype.forEach.call(t.querySelectorAll('tr'), function (tr) {
+                    cols.forEach(function (ci) {
+                        if (tr.children[ci]) tr.children[ci].classList.add('nw');
+                    });
+                    Object.keys(widths).forEach(function (ci) {
+                        if (tr.children[ci]) tr.children[ci].style.minWidth = widths[ci];
+                    });
+                });
+            });
+
+            // 状态标签（加粗形态）
+            Array.prototype.forEach.call(root.querySelectorAll('td > strong'), function (el) {
+                if (el !== el.parentNode.firstElementChild) return;
+                const key = el.textContent.trim();
+                if (STATUS[key]) el.classList.add('chip', 'chip-' + STATUS[key]);
+            });
+
+            // 状态标签（纯文本单元格）
+            Array.prototype.forEach.call(root.querySelectorAll('td'), function (td) {
+                const key = td.textContent.trim();
+                if (!STATUS[key] || td.querySelector('strong')) return;
+                td.innerHTML = '<span class="chip chip-' + STATUS[key] + '">' + key + '</span>';
+            });
+
+            // 空值
+            Array.prototype.forEach.call(root.querySelectorAll('td'), function (td) {
+                const t = td.textContent.trim();
+                if (t === '—' || t === '-' || t === '') td.classList.add('dash');
+            });
+
+            // 整段加粗 → 提示条
+            Array.prototype.forEach.call(root.querySelectorAll('p'), function (p) {
+                if (p.children.length !== 1) return;
+                if (p.firstElementChild.tagName !== 'STRONG') return;
+                if (p.textContent.trim().length < 24) return;
+                p.classList.add('callout');
+            });
+        }
+
+        /* ---------- 目录 ---------- */
+        function buildTOC(root) {
+            const list = document.getElementById('tocList');
+            list.innerHTML = '';
+            const heads = Array.prototype.slice.call(root.querySelectorAll('h2, h3'));
+            heads.forEach(function (h, i) {
+                if (!h.id) h.id = 'sec-' + i;
+                const a = document.createElement('a');
+                a.href = 'javascript:void(0)';
+                a.textContent = h.textContent;
+                a.dataset.target = h.id;
+                if (h.tagName === 'H3') a.className = 'lv2';
+                a.addEventListener('click', function () {
+                    const el = document.getElementById(h.id);
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+                list.appendChild(a);
+            });
+
+            const secCount = root.querySelectorAll('h2').length;
+            const metaSec = document.getElementById('metaSec');
+            if (metaSec) metaSec.textContent = secCount + ' 节';
+        }
+
+        function syncTOC() {
+            const links = document.querySelectorAll('.toc a');
+            if (!links.length) return;
+            let picked = links[0];
+            links.forEach(function (a) {
+                const el = document.getElementById(a.dataset.target);
+                if (el && el.getBoundingClientRect().top <= 150) picked = a;
+            });
+            links.forEach(function (a) { a.classList.toggle('on', a === picked); });
+        }
+
+        function syncProgress() {
+            const doc = document.documentElement;
+            const max = doc.scrollHeight - doc.clientHeight;
+            const p = max > 0 ? doc.scrollTop / max : 0;
+            document.getElementById('progressBar').style.width = (p * 100) + '%';
+        }
+
+        /* ---------- 载入 ---------- */
+        function stateHTML(title, desc) {
+            return '<div class="state"><b>' + title + '</b>' + desc + '</div>';
+        }
+
+        function load(i) {
+            if (busy || !DOCS[i] || i === current) return;
+            busy = true;
+
+            const d = DOCS[i];
+            const wrap = document.getElementById('wrap');
+
+            markActive(i);
+            document.body.dataset.doc = d.id;
+            wrap.style.opacity = '.3';
+            document.getElementById('tocList').innerHTML = '';
+
+            fetch(encodeURI(d.file), { cache: 'no-store' })
+                .then(function (res) {
+                    if (!res.ok) throw new Error('HTTP ' + res.status);
+                    return res.text();
+                })
+                .then(function (md) {
+                    md = md.replace(/^#\s+[^\n]*\r?\n+/, '');
+                    marked.setOptions({ gfm: true, breaks: false });
+                    const body = marked.parse(md);
+
+                    wrap.innerHTML = heroHTML(d) +
+                        '<div class="prose" id="prose">' + body + '</div>' +
+                        pagerHTML(i);
+
+                    const prose = wrap.querySelector('#prose');
+                    enhance(prose);
+                    buildTOC(prose);
+
+                    current = i;
+                    if (location.hash !== '#' + d.id) history.replaceState(null, '', '#' + d.id);
+                    window.scrollTo(0, 0);
+                    syncProgress();
+                    requestAnimationFrame(syncTOC);
+                })
+                .catch(function (err) {
+                    wrap.innerHTML = heroHTML(d) + stateHTML(
+                        '文档未能载入',
+                        '浏览器拦截了本地文件读取，请通过本地服务访问。<br><br>' +
+                        '在文档目录执行 <code>python -m http.server 8765</code>，再打开 <code>http://127.0.0.1:8765/' +
+                        encodeURIComponent(d.file) + '</code><br><br><span style="color:#c3bdb4">' + err.message + '</span>'
+                    );
+                })
+                .then(function () {
+                    busy = false;
+                    wrap.style.opacity = '1';
+                });
+        }
+
+        /* ---------- 事件 ---------- */
+        window.addEventListener('scroll', function () {
+            syncProgress();
+            syncTOC();
+        }, { passive: true });
+
+        document.addEventListener('click', function (e) {
+            const link = e.target.closest('.pager a[data-go]');
+            if (link) load(Number(link.dataset.go));
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (!e.altKey) return;
+            if (e.key === 'ArrowRight' && current < DOCS.length - 1) {
+                e.preventDefault();
+                load(current + 1);
+            }
+            if (e.key === 'ArrowLeft' && current > 0) {
+                e.preventDefault();
+                load(current - 1);
+            }
+        });
+
+        /* ---------- 站点信息 ---------- */
+        function initSite() {
+            var t = SITE.title || '文档';
+            document.title = SITE.docsTitle ? t + ' · ' + SITE.docsTitle : t;
+            document.getElementById('brandMark').textContent = SITE.mark || t.charAt(0);
+            document.getElementById('brandTitle').textContent = t;
+            document.getElementById('brandSub').textContent = SITE.subtitle || 'Docs';
+
+            // 序号与 id 缺省时自动补齐
+            DOCS.forEach(function (d, i) {
+                if (!d.num) d.num = String(i + 1).padStart(2, '0');
+                if (!d.id) d.id = 'doc' + (i + 1);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initSite();
+            buildNav();
+
+            if (!DOCS.length) {
+                document.getElementById('wrap').innerHTML = stateHTML(
+                    '还没有配置文档',
+                    '打开同目录的 <code>site.config.js</code>，在 <code>docs</code> 里按顺序列出每篇文档即可。<br><br>' +
+                    '每项需要 <code>num</code> 序号、<code>title</code> 标题、<code>file</code> 对应的 md 文件名；<code>kind</code> 与 <code>id</code> 可省略。'
+                );
+                return;
+            }
+
+            var id = location.hash.replace('#', '');
+            var idx = DOCS.findIndex(function (d) { return d.id === id; });
+            load(idx > -1 ? idx : 0);
+        });
+    </script>
+</body>
+
+</html>
